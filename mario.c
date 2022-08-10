@@ -41,10 +41,11 @@ int main(void)
 
         // Prints i * "#" (for the right piramid)
         int m;
-        for (m = 0; m <= i; m++) {
+        for (m = 0; m <= i; m++)
+        {
             printf("#");
         }
-        
+
         //Prints new line
         printf("\n");
     }
