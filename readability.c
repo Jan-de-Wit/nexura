@@ -28,16 +28,16 @@ int main(void)
             case 46:
                 s++;
                 break;
-            case 63:
             //Checks if cInput is a question mark
+            case 63:
                 s++;
                 break;
-            case 33:
             //Checks if cInput is an exclamation mark
+            case 33:
                 s++;
                 break;
-            default:
             //Checks if cInput is a letter
+            default:
                 if (isalpha(cInput))
                 {
                     l++;
