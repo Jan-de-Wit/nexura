@@ -40,6 +40,12 @@ int main(int argc, string argv[])
             int count = 1;
             for(l = 0; l < lengKey; l++)
             {
+                if (isalpha(key[l]) == false)
+                {
+                    printf("Key must only contain alphabetical characters.\n");
+                    return 1;
+                }
+
                 for(m = m + 1; m < lengKey; m++) {
                     if(key[l] == key[m] && key[l] != ' ') {
                         count++;
@@ -49,7 +55,7 @@ int main(int argc, string argv[])
             }
             if(count > 1 && key[l] != '0')
             {
-                printf("Key must not contain any duplicate characters.");
+                printf("Key must not contain any duplicate characters.\n");
                 return 1;
             }
             else
