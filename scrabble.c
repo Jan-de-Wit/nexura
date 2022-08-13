@@ -1,10 +1,7 @@
-#include <ctype.h>
-#include <cs50.h>
 #include <stdio.h>
+#include <cs50.h>
 #include <string.h>
-
-// Points assigned to each letter of the alphabet
-int POINTS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
+#include <ctype.h>
 
 int compute_score(string word);
 
@@ -18,7 +15,7 @@ int main(void)
     int score1 = compute_score(word1);
     int score2 = compute_score(word2);
 
-    // TODO: Print the winner
+    //Checks scores and outputs the according string
     if (score1 > score2)
     {
         printf("Player 1 Wins!\n");
@@ -33,129 +30,32 @@ int main(void)
     }
 }
 
-int compute_score(string word)
+
+int compute_score(string sInput)
 {
-    int i = 0;
+    int POINTS[] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10};
+    char letters[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    int i;
+    int j;
+    int index;
     int score = 0;
-    while (word[i] != '\0')
+
+    //Counts length of the string
+    int sLeng = strlen(sInput);
+
+    //Loops sLeng times
+    for (i = 0; i <= sLeng; i++)
     {
-        //Sets a temporary char variable
-        char character = word[i];
-
-        //Converts character to lowercase
-        char cLower = tolower(character);
-
-        if (isalpha(character))
+        //Loops 26 times
+        for (j = 0; j <= 26; j++)
         {
-            switch (cLower)
+            //Checks if lowercase sInput is the same as letters at any index
+            if (tolower(sInput[i]) == letters[j])
             {
-                //Adds letter value to score
-                case 97:
-                    score += POINTS[0];
-                    break;
-                //Adds letter value to score
-                case 98:
-                    score += POINTS[1];
-                    break;
-                //Adds letter value to score
-                case 99:
-                    score += POINTS[2];
-                    break;
-                //Adds letter value to score
-                case 100:
-                    score += POINTS[3];
-                    break;
-                //Adds letter value to score
-                case 101:
-                    score += POINTS[4];
-                    break;
-                //Adds letter value to score
-                case 102:
-                    score += POINTS[5];
-                    break;
-                //Adds letter value to score
-                case 103:
-                    score += POINTS[6];
-                    break;
-                //Adds letter value to score
-                case 104:
-                    score += POINTS[7];
-                    break;
-                //Adds letter value to score
-                case 105:
-                    score += POINTS[8];
-                    break;
-                //Adds letter value to score
-                case 106:
-                    score += POINTS[9];
-                    break;
-                //Adds letter value to score
-                case 107:
-                    score += POINTS[10];
-                    break;
-                //Adds letter value to score
-                case 108:
-                    score += POINTS[11];
-                    break;
-                //Adds letter value to score
-                case 109:
-                    score += POINTS[12];
-                    break;
-                //Adds letter value to score
-                case 110:
-                    score += POINTS[13];
-                    break;
-                //Adds letter value to score
-                case 111:
-                    score += POINTS[14];
-                    break;
-                //Adds letter value to score
-                case 112:
-                    score += POINTS[15];
-                    break;
-                //Adds letter value to score
-                case 113:
-                    score += POINTS[16];
-                    break;
-                //Adds letter value to score
-                case 114:
-                    score += POINTS[17];
-                    break;
-                //Adds letter value to score
-                case 115:
-                    score += POINTS[18];
-                    break;
-                //Adds letter value to score
-                case 116:
-                    score += POINTS[19];
-                    break;
-                //Adds letter value to score
-                case 117:
-                    score += POINTS[20];
-                    break;
-                //Adds letter value to score
-                case 118:
-                    score += POINTS[21];
-                    break;
-                //Adds letter value to score
-                case 119:
-                    score += POINTS[22];
-                    break;
-                //Adds letter value to score
-                case 120:
-                    score += POINTS[23];
-                    break;
-                //Adds letter value to score
-                case 121:
-                    score += POINTS[24];
-                    break;
-                //Adds letter value to score
-                case 122:
-                    score += POINTS[25];
-                    break;
+                score += POINTS[j];
+                break;
             }
         }
-        i++;
     }
     return score;
 }
