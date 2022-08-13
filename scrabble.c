@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int compute_score(string word);
+int compute_score(string sInput);
 
 int main(void)
 {
@@ -37,14 +37,13 @@ int compute_score(string sInput)
     char letters[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     int i;
     int j;
-    int index;
     int score = 0;
 
     //Counts length of the string
     int sLeng = strlen(sInput);
 
     //Loops sLeng times
-    for (i = 0; i <= sLeng; i++)
+    for (i = 0; i < sLeng; i++)
     {
         //Loops 26 times
         for (j = 0; j <= 26; j++)
