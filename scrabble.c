@@ -49,81 +49,107 @@ int compute_score(string word)
         {
             switch (cLower)
             {
+                //Adds letter value to score
                 case 97:
                     score += POINTS[0];
                     break;
+                //Adds letter value to score
                 case 98:
                     score += POINTS[1];
                     break;
+                //Adds letter value to score
                 case 99:
                     score += POINTS[2];
                     break;
+                //Adds letter value to score
                 case 100:
                     score += POINTS[3];
                     break;
+                //Adds letter value to score
                 case 101:
                     score += POINTS[4];
                     break;
+                //Adds letter value to score
                 case 102:
                     score += POINTS[5];
                     break;
+                //Adds letter value to score
                 case 103:
                     score += POINTS[6];
                     break;
+                //Adds letter value to score
                 case 104:
                     score += POINTS[7];
                     break;
+                //Adds letter value to score
                 case 105:
                     score += POINTS[8];
                     break;
+                //Adds letter value to score
                 case 106:
                     score += POINTS[9];
                     break;
+                //Adds letter value to score
                 case 107:
                     score += POINTS[10];
                     break;
+                //Adds letter value to score
                 case 108:
                     score += POINTS[11];
                     break;
+                //Adds letter value to score
                 case 109:
                     score += POINTS[12];
                     break;
+                //Adds letter value to score
                 case 110:
                     score += POINTS[13];
                     break;
+                //Adds letter value to score
                 case 111:
                     score += POINTS[14];
                     break;
+                //Adds letter value to score
                 case 112:
                     score += POINTS[15];
                     break;
+                //Adds letter value to score
                 case 113:
                     score += POINTS[16];
                     break;
+                //Adds letter value to score
                 case 114:
                     score += POINTS[17];
                     break;
+                //Adds letter value to score
                 case 115:
                     score += POINTS[18];
                     break;
+                //Adds letter value to score
                 case 116:
                     score += POINTS[19];
                     break;
+                //Adds letter value to score
                 case 117:
                     score += POINTS[20];
                     break;
+                //Adds letter value to score
                 case 118:
                     score += POINTS[21];
                     break;
+                //Adds letter value to score
                 case 119:
                     score += POINTS[22];
                     break;
+                //Adds letter value to score
                 case 120:
                     score += POINTS[23];
                     break;
+                //Adds letter value to score
                 case 121:
                     score += POINTS[24];
                     break;
+                //Adds letter value to score
                 case 122:
                     score += POINTS[25];
                     break;
