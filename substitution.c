@@ -53,7 +53,7 @@ int main(int argc, string argv[])
                     }
                 }
             }
-            if(count > 1 && key[l] != '0')
+            if(count > 1)
             {
                 printf("Key must not contain any duplicate characters.\n");
                 return 1;
@@ -319,6 +319,7 @@ int main(int argc, string argv[])
                 //Output
                 printf("ciphertext: ");
 
+                //Loops through and prints all characters inside cAll[]
                 int k;
                 for (k = 0; k < lengInput; k++)
                 {
