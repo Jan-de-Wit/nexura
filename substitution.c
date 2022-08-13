@@ -47,13 +47,14 @@ int main(int argc, string argv[])
                 }
                 else
                 {
-                    for(m = 0; m < lengKey; m++) {
-                    if(key[l] == key[m] && key[l] != ' ')
+                    for(m = m + 1; m < lengKey; m++)
                     {
-                        count++;
-                        key[m] = '0';
+                        if(key[l] == key[m] && key[l] != ' ')
+                        {
+                            count++;
+                            key[m] = '0';
+                        }
                     }
-                }
                 }
             }
             if(count > 1)
