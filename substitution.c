@@ -45,12 +45,15 @@ int main(int argc, string argv[])
                     printf("Key must only contain alphabetical characters.\n");
                     return 1;
                 }
-
-                for(m = m + 1; m < lengKey; m++) {
-                    if(key[l] == key[m] && key[l] != ' ') {
+                else
+                {
+                    for(m = 0; m < lengKey; m++) {
+                    if(key[l] == key[m] && key[l] != ' ')
+                    {
                         count++;
                         key[m] = '0';
                     }
+                }
                 }
             }
             if(count > 1)
