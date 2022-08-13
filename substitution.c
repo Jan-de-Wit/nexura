@@ -47,7 +47,7 @@ int main(int argc, string argv[])
                 }
                 else
                 {
-                    for(m = 1; m < lengKey; m++)
+                    for(m = l + 1; m < lengKey; m++)
                     {
                         if(key[l] == key[m] && key[l] != ' ')
                         {
@@ -57,6 +57,7 @@ int main(int argc, string argv[])
                     }
                 }
             }
+
             if(count > 1)
             {
                 printf("Key must not contain any duplicate characters.\n");
