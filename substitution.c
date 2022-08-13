@@ -10,7 +10,6 @@ int main(int argc, string argv[])
     int lengKey;
     char keyArr[26];
     char s[27];
-    char cAll[27];
     char character;
     char cTemp;
     int lengInput;
@@ -41,6 +40,7 @@ int main(int argc, string argv[])
 
             //Gets length of the by user inputted string
             lengInput = strlen(sText);
+            char cAll[lengInput];
 
             while (sText[j] != '\0')
             {
@@ -291,16 +291,15 @@ int main(int argc, string argv[])
                 cAll[j] = cTemp;
                 j++;
             }
+            //Output
+            printf("ciphertext: ");
+
+            int k;
+            for (k = 0; k < lengInput; k++)
+            {
+                printf("%c", cAll[k]);
+            }
+            printf("\n");
         }
     }
-
-    //Output
-    printf("ciphertext: ");
-
-    int k;
-    for (k = 0; k < lengInput; k++)
-    {
-        printf("%c", cAll[k]);
-    }
-    printf("\n");
 }
