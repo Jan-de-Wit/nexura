@@ -1,6 +1,7 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 // Max number of candidates
 #define MAX 9
@@ -18,7 +19,7 @@ candidate candidates[MAX];
 
 // Function prototypes
 bool vote(string name, int c);
-void print_winner(int candidate_count);
+void print_winner(int c);
 
 int main(int argc, string argv[])
 {
@@ -66,6 +67,15 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name, int c)
 {
+    int leng = strlen(name);
+    for (int i = 0; i < leng; i++)
+    {
+        if (isalpha(name[i]) == 0)
+        {
+            return false;
+        }
+    }
+
     for (int i = 0; i < c; i++)
     {
         if (strcmp(name, candidates[i].name) == 0)
@@ -86,19 +96,24 @@ void print_winner(int c)
         {
             if (candidates[i].votes > candidates[i + 1].votes)
             {
-                int temp = candidates[i].votes;
+                //Swaps votes
+                int iTemp = candidates[i].votes;
                 candidates[i].votes = candidates[i + 1].votes;
-                candidates[i+1].votes = temp;
+                candidates[i+1].votes = iTemp;
+
+                //Swaps names
+                string sTemp = candidates[i].name;
+                candidates[i].name = candidates[i + 1].name;
+                candidates[i+1].name = sTemp;
             }
         }
     }
 
     int iLastDigit = candidates[c - 1].votes % 10;
-    int winnerIndex[c];
 
     for (int i = 0; i < c; i++)
     {
-        if (iLastDigit == candidates[i].votes)
+        if (iLastDigit == candidates[i].votes % 10)
         {
             printf("%s\n", candidates[i].name);
         }
