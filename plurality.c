@@ -17,15 +17,15 @@ candidate;
 // Array of candidates
 candidate candidates[MAX];
 
+// Number of candidates
+int candidate_count;
+
 // Function prototypes
 bool vote(string name);
 void print_winner();
 
 int main(int argc, string argv[])
 {
-    // Number of candidates
-    int candidate_count;
-
     // Check for invalid usage
     if (argc < 2)
     {
