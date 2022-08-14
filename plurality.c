@@ -101,12 +101,12 @@ void print_winner()
                 //Swaps votes
                 int iTemp = candidates[i].votes;
                 candidates[i].votes = candidates[i + 1].votes;
-                candidates[i+1].votes = iTemp;
+                candidates[i + 1].votes = iTemp;
 
                 //Swaps names
                 string sTemp = candidates[i].name;
                 candidates[i].name = candidates[i + 1].name;
-                candidates[i+1].name = sTemp;
+                candidates[i + 1].name = sTemp;
             }
         }
     }
