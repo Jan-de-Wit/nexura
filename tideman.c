@@ -119,11 +119,16 @@ void record_preferences(int ranks[])
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        for (int j = 0; j < candidate_count; j++)
+        for (int j = i + 1; j < candidate_count; j++)
         {
             preferences[ranks[i]][ranks[j]]++;
+            printf("Preferences[%i][%i] got updated to: %i", i, j, preferences[ranks[i]][ranks[j]]);
         }
     }
+
+    // preferences[ranks[0]][ranks[1]]++;
+    // preferences[ranks[0]][ranks[2]]++;
+    // preferences[ranks[1]][ranks[2]]++;
     return;
 }
 
