@@ -125,10 +125,6 @@ void record_preferences(int ranks[])
             printf("Preferences[%i][%i] got updated to: %i", i, j, preferences[ranks[i]][ranks[j]]);
         }
     }
-
-    // preferences[ranks[0]][ranks[1]]++;
-    // preferences[ranks[0]][ranks[2]]++;
-    // preferences[ranks[1]][ranks[2]]++;
     return;
 }
 
@@ -187,7 +183,53 @@ void sort_pairs(void)
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
-    // TODO
+    //Loops i times
+    for (int i = 0; i < pair_count; i++)
+    {
+        //Checks if connection in reverse exists
+        //eg pairs[i][j] needs to be checked and pairs[j][i] = true
+        if (locked[pairs[i].loser][pairs[i].winner] == false)
+        {
+            //Sets locked[i][j] to true
+            locked[pairs[i].winner][pairs[i].loser] = true;
+
+            int lockedCount = 0;
+            //Checks if locked[i][j] doesn't make a cycle
+            for (int j = 1; j <= candidate_count; j++)
+            {
+                if (j != candidate_count - 1)
+                {
+                    if (locked[j - 1][j] == true)
+                    {
+                        lockedCount++;
+                    }
+                }
+                else
+                {
+                    if (locked[j][0] == true)
+                    {
+                        lockedCount++;
+                    }
+                }
+            }
+            if (lockedCount != candidate_count)
+            {
+                lockedCount = 0;
+                for (int j = 1; j <= candidate_count; j++)
+                {
+                    if (locked[candidate_count][candidate_count - j] == true)
+                    {
+                        lockedCount++;
+                    }
+                }
+            }
+            else
+            {
+                locked[pairs[i].winner][pairs[i].loser] = false;
+            }
+        }
+
+    }
     return;
 }
 
