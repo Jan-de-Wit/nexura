@@ -103,7 +103,7 @@ bool vote(int rank, string name, int ranks[])
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (strcmp(name, candidates[i]) == 0)
+        if (strcasecmp(name, candidates[i]) == 0)
         {
             //Ranks[rank <- indicates which rating rank]
             //= i <- indicates which index of candidates
@@ -144,11 +144,24 @@ void add_pairs(void)
 // Sort pairs in decreasing order by strength of victory
 void sort_pairs(void)
 {
+    int pCount = 0;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        for (int j = 0; j < candidate_count; j++)
+        {
+            if (preferences[i][j] > preferences[j][i])
+            {
+                winScore[pCount] = preferences[i][j] - preferences[j][i];
+                pCount++;
+            }
+        }
+    }
+
     for (int i = 0; i < pair_count - 1; i++)
     {
         for (int j = 0; j < pair_count -2; j++)
         {
-            if (pairs[i].winner < pairs[i + 1].winner)
+            if (pCount[i] < pCount[i + 1])
             {
                 pair temp = pairs[i];
                 pairs[i] = pairs[i + 1];
