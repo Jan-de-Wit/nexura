@@ -122,7 +122,6 @@ void record_preferences(int ranks[])
         for (int j = i + 1; j < candidate_count; j++)
         {
             preferences[ranks[i]][ranks[j]]++;
-            printf("Preferences[%i][%i] got updated to: %i", i, j, preferences[ranks[i]][ranks[j]]);
         }
     }
     return;
@@ -184,61 +183,99 @@ void sort_pairs(void)
 void lock_pairs(void)
 {
     //Loops i times
+    printf("pair_count is: %i\n", pair_count);
     for (int i = 0; i < pair_count; i++)
     {
-        //Checks if connection in reverse exists
-        //eg pairs[i][j] needs to be checked and pairs[j][i] = true
-        if (locked[pairs[i].loser][pairs[i].winner] == false)
-        {
-            //Sets locked[i][j] to true
-            locked[pairs[i].winner][pairs[i].loser] = true;
+        //Sets locked[i][j] to true
+        locked[pairs[i].winner][pairs[i].loser] = true;
+        printf("There is now a connection between winner (%i) and loser (%i)\n", pairs[i].winner, pairs[i].loser);
 
-            int lockedCount = 0;
-            //Checks if locked[i][j] doesn't make a cycle
-            for (int j = 1; j <= candidate_count; j++)
+        int lockedCount = 0;
+        //Checks if locked[i][j] doesn't make a cycle
+        for (int j = 0; j < candidate_count; j++)
+        {
+            if (j != candidate_count - 1)
             {
-                if (j != candidate_count - 1)
+                if (locked[j - 1][j] == true)
                 {
-                    if (locked[j - 1][j] == true)
-                    {
-                        lockedCount++;
-                    }
-                }
-                else
-                {
-                    if (locked[j][0] == true)
-                    {
-                        lockedCount++;
-                    }
-                }
-            }
-            if (lockedCount != candidate_count)
-            {
-                lockedCount = 0;
-                for (int j = 1; j <= candidate_count; j++)
-                {
-                    if (locked[candidate_count][candidate_count - j] == true)
-                    {
-                        lockedCount++;
-                    }
-                }
-                if (lockedCount == candidate_count)
-                {
-                    locked[pairs[i].winner][pairs[i].loser] = false;
+                    lockedCount++;
+                    printf("lockedCount is now %i\n", lockedCount);
                 }
             }
             else
             {
+                if (locked[j][0] == true)
+                {
+                    lockedCount++;
+                    printf("lockedCount is now %i\n", lockedCount);
+                }
+            }
+        }
+        if (lockedCount >= candidate_count)
+        {
+            locked[pairs[i].winner][pairs[i].loser] = false;
+            printf("Connection between winner (%i) and loser (%i) got removed\n", pairs[i].winner, pairs[i].loser);
+        }
+        else
+        {
+            lockedCount = 0;
+            for (int j = 0; j < candidate_count; j++)
+            {
+                if (j == candidate_count - 1)
+                {
+                    if (locked[j][0] == true)
+                    {
+                        lockedCount++;
+                        printf("lockedCount is now %i\n", lockedCount);
+                    }
+                }
+                else
+                {
+                    if (locked[j][j + 1] == true)
+                    {
+                        lockedCount++;
+                        printf("lockedCount is now %i\n", lockedCount);
+                    }
+                }
+            }
+            if (lockedCount >= candidate_count)
+            {
                 locked[pairs[i].winner][pairs[i].loser] = false;
+                printf("Connection between winner (%i) and loser (%i) got removed\n\n", pairs[i].winner, pairs[i].loser);
             }
         }
     }
-    return;
 }
 
 // Print the winner of the election
 void print_winner(void)
 {
-    // TODO
-    return;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (i == 0)
+        {
+            if (locked[candidate_count - 1][i] == false && locked[i + 1][i] == false)
+            {
+                printf("%s\n", candidates[i]);
+                return;
+            }
+        }
+        else if (i == candidate_count - 1)
+        {
+            if (locked[0][i] == false && locked[i - 1][i] == false)
+            {
+                printf("%s\n", candidates[i]);
+                return;
+            }
+        }
+        else
+        {
+            if (locked[i - 1][i] == false && locked[i + 1][i] == false)
+            {
+                printf("%s\n", candidates[i]);
+                return;
+            }
+        }
+    }
+    printf("printing failed lol\n");
 }
