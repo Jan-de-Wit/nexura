@@ -222,13 +222,16 @@ void lock_pairs(void)
                         lockedCount++;
                     }
                 }
+                if (lockedCount == candidate_count)
+                {
+                    locked[pairs[i].winner][pairs[i].loser] = false;
+                }
             }
             else
             {
                 locked[pairs[i].winner][pairs[i].loser] = false;
             }
         }
-
     }
     return;
 }
