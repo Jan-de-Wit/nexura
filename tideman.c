@@ -191,34 +191,34 @@ void lock_pairs(void)
         printf("There is now a connection between winner (%i) and loser (%i)\n", pairs[i].winner, pairs[i].loser);
 
         int lockedCount = 0;
-        //Checks if locked[i][j] doesn't make a cycle
-        for (int j = 0; j < candidate_count; j++)
-        {
-            //BUG : check for clockwise cycle doesnt work
-            if (j == 0)
-            {
-                if (locked[j][candidate_count - 1] == true)
-                {
-                    lockedCount++;
-                    printf("lockedCount is now %i\n", lockedCount);
-                }
-            }
-            else
-            {
-                if (locked[j][j - 1] == true)
-                {
-                    lockedCount++;
-                    printf("lockedCount is now %i\n", lockedCount);
-                }
-            }
-        }
-        if (lockedCount >= candidate_count)
-        {
-            locked[pairs[i].winner][pairs[i].loser] = false;
-            printf("Connection between winner (%i) and loser (%i) got removed\n", pairs[i].winner, pairs[i].loser);
-        }
-        else
-        {
+        // //Checks if locked[i][j] doesn't make a cycle
+        // for (int j = 0; j < candidate_count; j++)
+        // {
+        //     //BUG : check for clockwise cycle doesnt work
+        //     if (j == 0)
+        //     {
+        //         if (locked[j][candidate_count - 1] == true)
+        //         {
+        //             lockedCount++;
+        //             printf("lockedCount is now %i\n", lockedCount);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (locked[j][j - 1] == true)
+        //         {
+        //             lockedCount++;
+        //             printf("lockedCount is now %i\n", lockedCount);
+        //         }
+        //     }
+        // }
+        // if (lockedCount >= candidate_count)
+        // {
+        //     locked[pairs[i].winner][pairs[i].loser] = false;
+        //     printf("Connection between winner (%i) and loser (%i) got removed\n", pairs[i].winner, pairs[i].loser);
+        // }
+        // else
+        // {
             //Against the clock cycle check
             lockedCount = 0;
             for (int j = 0; j < candidate_count; j++)
@@ -247,7 +247,7 @@ void lock_pairs(void)
             }
         }
     }
-}
+
 
 // Print the winner of the election
 void print_winner(void)
