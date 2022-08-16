@@ -167,7 +167,7 @@ void sort_pairs(void)
     //Sorts pairs[] based on their winScore
     for (int i = 0; i < pair_count - 1; i++)
     {
-        for (int j = 0; j < pair_count -2; j++)
+        for (int j = 0; j < pair_count - 2; j++)
         {
             if (winScore[i] < winScore[i + 1])
             {
@@ -228,8 +228,11 @@ void print_winner(void)
 
         }
 
-        if (lost) continue;
-        if(!lost)
+        if (lost)
+        {
+            continue;
+        }
+        else
         {
             printf("%s\n", candidates[i]);
         }
