@@ -215,7 +215,7 @@ void lock_pairs(void)
 
 bool hasLost(int winner)
 {
-    for (int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < pair_count; i++)
     {
         if (locked[pairs[i].winner][winner] == true)
         {
