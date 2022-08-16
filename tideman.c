@@ -131,6 +131,7 @@ void record_preferences(int ranks[])
 // Record pairs of candidates where one is preferred over the other
 void add_pairs(void)
 {
+    //*Bubble sort*
     for (int i = 0; i < candidate_count; i++)
     {
         for (int j = 0; j < candidate_count; j++)
@@ -182,10 +183,13 @@ void sort_pairs(void)
 
 bool makesCircle(int startCycle, int loser)
 {
+    //base case
     if (loser == startCycle)
     {
         return true;
     }
+    //Loops and checks if [loser][i] is locked and next up
+    //it checks whether it makes a cycle
     for (int i = 0; i < candidate_count; i++)
     {
         if (locked[loser][i])
@@ -203,6 +207,8 @@ bool makesCircle(int startCycle, int loser)
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
+    //Loops through and runs the makesCircle function to check
+    //if the lock would make any cycles
     for (int i = 0; i < pair_count; i++)
     {
         if (!makesCircle(pairs[i].winner, pairs[i].loser))
@@ -215,6 +221,7 @@ void lock_pairs(void)
 // Print the winner of the election
 void print_winner(void)
 {
+    //Loops through to check if theres any locks on [j][i]
     for (int i = 0; i < candidate_count; i++)
     {
         bool lost = false;
@@ -228,6 +235,7 @@ void print_winner(void)
 
         }
 
+        //Checks whether candidate[i] lost (once or more times)
         if (lost)
         {
             continue;
