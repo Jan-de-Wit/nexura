@@ -230,7 +230,7 @@ void print_winner(void)
 {
     for (int i = 0; i < pair_count; i++)
     {
-        if (locked[pairs[i].winner][pairs[i].loser] == true && !hasLost(locked[pairs[i].winner]))
+        if (locked[pairs[i].winner][pairs[i].loser] && !hasLost(locked[pairs[i].winner]))
         {
             printf("%s", pairs[i].winner);
             return;
