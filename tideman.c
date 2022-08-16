@@ -187,7 +187,7 @@ bool makesCircle(int startCycle, int loser)
     }
     for (int i = 0; i < candidate_count; i++)
     {
-        if (!makesCircle(loser, i))
+        if (makesCircle(loser, i))
         {
             return true;
         }
