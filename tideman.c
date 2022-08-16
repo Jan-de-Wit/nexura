@@ -232,7 +232,7 @@ void print_winner(void)
     {
         if (locked[pairs[i].winner][pairs[i].loser] && !hasLost(pairs[i].winner))
         {
-            printf("%s", pairs[i].winner);
+            printf("%s\n", candidates[pairs[i].winner]);
             return;
         }
     }
