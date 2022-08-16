@@ -194,9 +194,10 @@ void lock_pairs(void)
         //Checks if locked[i][j] doesn't make a cycle
         for (int j = 0; j < candidate_count; j++)
         {
-            if (j != candidate_count - 1)
+            //BUG : check for clockwise cycle doesnt work
+            if (j == 0)
             {
-                if (locked[j - 1][j] == true)
+                if (locked[j][candidate_count - 1] == true)
                 {
                     lockedCount++;
                     printf("lockedCount is now %i\n", lockedCount);
@@ -204,7 +205,7 @@ void lock_pairs(void)
             }
             else
             {
-                if (locked[j][0] == true)
+                if (locked[j][j - 1] == true)
                 {
                     lockedCount++;
                     printf("lockedCount is now %i\n", lockedCount);
@@ -218,6 +219,7 @@ void lock_pairs(void)
         }
         else
         {
+            //Against the clock cycle check
             lockedCount = 0;
             for (int j = 0; j < candidate_count; j++)
             {
