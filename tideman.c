@@ -34,6 +34,7 @@ void add_pairs(void);
 void sort_pairs(void);
 bool makesCircle(int startCycle, int loser);
 void lock_pairs(void);
+bool hasLost(int winner);
 void print_winner(void);
 
 int main(int argc, string argv[])
@@ -212,35 +213,27 @@ void lock_pairs(void)
     }
 }
 
-// Print the winner of the election
-void print_winner(void)
+bool hasLost(int winner)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (i == 0)
+        if (locked[i][winner] == true)
         {
-            if (locked[candidate_count - 1][i] == false && locked[i + 1][i] == false)
-            {
-                printf("%s\n", candidates[i]);
-                return;
-            }
-        }
-        else if (i == candidate_count - 1)
-        {
-            if (locked[0][i] == false && locked[i - 1][i] == false)
-            {
-                printf("%s\n", candidates[i]);
-                return;
-            }
-        }
-        else
-        {
-            if (locked[i - 1][i] == false && locked[i + 1][i] == false)
-            {
-                printf("%s\n", candidates[i]);
-                return;
-            }
+            return true;
         }
     }
-    printf("printing failed lol\n");
+    return false;
+}
+
+// Print the winner of the election
+void print_winner(void)
+{
+    for (int i = 0; i < pair_count; i++)
+    {
+        if (locked[pairs[i].winner][pairs[i].loser] == true && !hasLost(locked[pairs[i].winner]))
+        {
+            printf("%s", pairs[i].winner);
+            return;
+        }
+    }
 }
