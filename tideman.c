@@ -217,7 +217,7 @@ bool hasLost(int winner)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (locked[i][winner] == true)
+        if (locked[pairs[i].winner][winner] == true)
         {
             return true;
         }
