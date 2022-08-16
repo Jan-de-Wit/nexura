@@ -217,12 +217,12 @@ bool hasLost(int winner)
 {
     for (int i = 0; i < pair_count; i++)
     {
-        if (locked[pairs[i].winner][winner] == true)
+        if (locked[pairs[i].winner][winner])
         {
-            return true;
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 // Print the winner of the election
@@ -230,7 +230,7 @@ void print_winner(void)
 {
     for (int i = 0; i < pair_count; i++)
     {
-        if (locked[pairs[i].winner][pairs[i].loser] && !hasLost(pairs[i].winner))
+        if (locked[pairs[i].winner][pairs[i].loser] && hasLost(pairs[i].winner))
         {
             printf("%s\n", candidates[pairs[i].winner]);
             return;
