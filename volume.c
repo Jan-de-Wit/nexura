@@ -41,7 +41,6 @@ int main(int argc, char *argv[])
 
     // TODO: Read samples from input file and write updated data to output file
     int freadError = 0;
-    int n = 0;
     int16_t sample = 0;
 
     do
@@ -54,19 +53,9 @@ int main(int argc, char *argv[])
         {
             sample = sample * factor;
             fwrite(&sample, sizeof(int16_t), 1, output);
-            n++;
         }
     }
     while (freadError == 0);
-
-    if (n == 352.800 / 2)
-    {
-        printf("$$$ looped %i times\n", n);
-    }
-    else
-    {
-        printf("###looped %i times\n", n);
-    }
 
     // Close files
     fclose(input);
