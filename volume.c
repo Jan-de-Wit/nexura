@@ -41,7 +41,23 @@ int main(int argc, char *argv[])
     free(header);
 
     // TODO: Read samples from input file and write updated data to output file
+    int freadError = 0;
 
+    while (freadError == 0)
+    {
+        int16_t sample = 0;
+        int16_t *p = &sample;
+
+        if (fread(p, sizeof(int16_t), 1, input) == 0)
+        {
+            sample = sample * factor;
+            fwrite(p, sizeof(int16_t), 1, output);
+        }
+        else
+        {
+            freadError = 1;
+        }
+    }
     // length of samples
 
     // for each sample (int16_t):
