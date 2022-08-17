@@ -40,18 +40,25 @@ int main(int argc, char *argv[])
     fwrite(&input, HEADER_SIZE, 1, output);
     free(header);
 
+    printf("Header got copied\n");
+
     // TODO: Read samples from input file and write updated data to output file
     int freadError = 0;
-
+    int n = 0;
     while (freadError == 0)
     {
+        printf("While loop initiated\n");
         int16_t sample = 0;
         int16_t *p = &sample;
 
-        if (fread(p, sizeof(int16_t), 1, input) == 0)
+        printf("Variables initialized\n");
+        if (fread(p, sizeof(int16_t), 1, input) == 1)
         {
+            printf("If statement worked");
             sample = sample * factor;
             fwrite(p, sizeof(int16_t), 1, output);
+            n++;
+            printf("Succesfull write %i times\n", n);
         }
         else
         {
