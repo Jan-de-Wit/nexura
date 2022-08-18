@@ -128,13 +128,16 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                     {
                         if (l >= 0 || l <= width)
                         {
-                            GxRed += orgImage[k][l].rgbtRed  * GxValue[counter];;
-                            GxGreen += orgImage[k][l].rgbtGreen * GxValue[counter];;
-                            GxBlue += orgImage[k][l].rgbtBlue * GxValue[counter];
+                            int GxFactor = GxValue[counter];
+                            int GyFactor = GyValue[counter];
 
-                            GyRed += orgImage[k][l].rgbtRed  * GyValue[counter];;
-                            GyGreen += orgImage[k][l].rgbtGreen * GyValue[counter];;
-                            GyBlue += orgImage[k][l].rgbtBlue * GyValue[counter];
+                            GxRed += orgImage[k][l].rgbtRed  * GxFactor;
+                            GxGreen += orgImage[k][l].rgbtGreen * GxFactor;
+                            GxBlue += orgImage[k][l].rgbtBlue * GxFactor;
+
+                            GyRed += orgImage[k][l].rgbtRed  * GyFactor;
+                            GyGreen += orgImage[k][l].rgbtGreen * GyFactor;
+                            GyBlue += orgImage[k][l].rgbtBlue * GyFactor;
 
                             counter++;
                         }
