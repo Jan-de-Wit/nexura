@@ -155,9 +155,9 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-            int gRed = round(sqrt(GxRed) + sqrt(GyRed));
-            int gGreen = round(sqrt(GxGreen) + sqrt(GyGreen));
-            int gBlue = round(sqrt(GxBlue) + sqrt(GyBlue));
+            int gRed = round((GxRed * GxRed) + (GyRed * GyRed));
+            int gGreen = round((GxGreen * GxGreen) + (GyGreen * GyGreen));
+            int gBlue = round((GxBlue * GxBlue) + (GyBlue * GyBlue));
 
             if (gRed > 255)
             {
