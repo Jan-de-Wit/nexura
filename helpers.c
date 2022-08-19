@@ -78,9 +78,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     }
                 }
             }
-            int round(red = allRed / counter);
-            int round(green = allGreen / counter);
-            int round(blue = allBlue / counter);
+            int red = round(allRed / counter);
+            int green = round(allGreen / counter);
+            int blue = round(allBlue / counter);
 
             image[i][j].rgbtRed = red;
             image[i][j].rgbtGreen = green;
