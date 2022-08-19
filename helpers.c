@@ -55,12 +55,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
-            float counter = 0;
+            int counter = 0;
             int n = i + 1;
             int m = j + 1;
-            int allRed = 0;
-            int allGreen = 0;
-            int allBlue = 0;
+            float allRed = 0;
+            float allGreen = 0;
+            float allBlue = 0;
 
             for (int k = i - 1; k <= n; k++)
             {
@@ -155,9 +155,9 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-            int gRed = sqrt(GxRed) + sqrt(GyRed);
-            int gGreen = sqrt(GxGreen) + sqrt(GyGreen);
-            int gBlue = sqrt(GxBlue) + sqrt(GyBlue);
+            int gRed = round(sqrt(GxRed) + sqrt(GyRed));
+            int gGreen = round(sqrt(GxGreen) + sqrt(GyGreen));
+            int gBlue = round(sqrt(GxBlue) + sqrt(GyBlue));
 
             if (gRed > 255)
             {
