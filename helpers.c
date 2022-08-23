@@ -58,10 +58,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             int counter = 0;
-            RGBTRIPLE channelAdd;
-            channelAdd.rgbtRed = 0;
-            channelAdd.rgbtGreen = 0;
-            channelAdd.rgbtBlue = 0;
+            int allRed = 0;
+            int allGreen = 0;
+            int allBlue = 0;
 
             int row[] = {i - 1, i, i + 1, i - 1, i, i + 1, i - 1, i, i + 1};
             int column[] = {j - 1, j, j + 1, j - 1, j, j + 1, j - 1, j, j + 1};
@@ -74,10 +73,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     {
                         if (column[x] >= 0 && column[x] <= width)
                         {
-                            channelAdd.rgbtRed += orgImage[row[y]][column[x]].rgbtRed;
-                            channelAdd.rgbtGreen += orgImage[row[y]][column[x]].rgbtGreen;
-                            channelAdd.rgbtBlue += orgImage[row[y]][column[x]].rgbtBlue;
-                            printf("orgRed = %i, total now: %i\n", orgImage[row[y]][column[x]].rgbtRed, channelAdd.rgbtRed);
+                            allRed += orgImage[row[y]][column[x]].rgbtRed;
+                            allGreen += orgImage[row[y]][column[x]].rgbtGreen;
+                            allBlue += orgImage[row[y]][column[x]].rgbtBlue;
+                            // printf("orgRed = %i, total now: %i\n", orgImage[row[y]][column[x]].rgbtRed, allRed);
 
                             counter++;
                         }
@@ -85,10 +84,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-            int red = channelAdd.rgbtRed / counter;
-            int green = channelAdd.rgbtGreen / counter;
-            int blue = channelAdd.rgbtBlue / counter;
-            printf("allred is: %i and counter is: %i\nResult is: %i\n", channelAdd.rgbtRed, counter, red);
+            int red = allRed / counter;
+            int green = allGreen / counter;
+            int blue = allBlue / counter;
+            // printf("allred is: %i and counter is: %i\nResult is: %i\n", allRed, counter, red);
 
             image[i][j].rgbtRed = red;
             image[i][j].rgbtGreen = green;
