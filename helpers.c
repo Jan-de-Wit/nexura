@@ -57,7 +57,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         //Iterates through every column
         for (int j = 0; j < width; j++)
         {
-            int counter = 0;
+            float counter = 0;
             int allRed = 0;
             int allGreen = 0;
             int allBlue = 0;
@@ -84,9 +84,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-            int red = allRed / counter;
-            int green = allGreen / counter;
-            int blue = allBlue / counter;
+            int red = round(allRed / counter);
+            int green = round(allGreen / counter);
+            int blue = round(allBlue / counter);
             // printf("allred is: %i and counter is: %i\nResult is: %i\n", allRed, counter, red);
 
             image[i][j].rgbtRed = red;
