@@ -58,35 +58,36 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             int counter = 0;
-            int n = i + 1;
-            int m = j + 1;
-            int allRed = 0;
-            int allGreen = 0;
-            int allBlue = 0;
+            RGBTRIPLE channelAdd;
+            channelAdd.rgbtRed = 0;
+            channelAdd.rgbtGreen = 0;
+            channelAdd.rgbtBlue = 0;
 
-            //Iterates through 3x3 box row
-            for (int k = i - 1; k <= n; k++)
+            int row[] = {i - 1, i, i + 1, i - 1, i, i + 1, i - 1, i, i + 1};
+            int column[] = {j - 1, j, j + 1, j - 1, j, j + 1, j - 1, j, j + 1};
+
+            for (int y = 0; y < 3; y++)
             {
-                //Iterates through 3x3 box column
-                for (int l = j - 1; l <= m; l++)
+                for (int x = 0; x < 3; x++)
                 {
-                    // //Checks if k or l is inside the array range
-                    // if (k > 0 && k < height && l >= 0 && l <= width)
-                    // {
-                    //Adds channel values to a variable
-                    allRed += orgImage[k][l].rgbtRed;
-                    allGreen += orgImage[k][l].rgbtGreen;
-                    allBlue += orgImage[k][l].rgbtBlue;
-                    counter++;
-                    printf("Added %i, total is now: %i\n", orgImage[k][l].rgbtRed, allRed);
-                    // }
+                    if (row[y] >= 0 && row[y] <= height)
+                    {
+                        if (column[x] >= 0 && column[x] <= width)
+                        {
+                            channelAdd.rgbtRed += orgImage[row[y]][column[x]].rgbtRed;
+                            channelAdd.rgbtGreen += orgImage[row[y]][column[x]].rgbtGreen;
+                            channelAdd.rgbtBlue += orgImage[row[y]][column[x]].rgbtBlue;
+
+                            counter++;
+                        }
+                    }
                 }
             }
 
-            int red = allRed / counter;
-            int green = allGreen / counter;
-            int blue = allBlue / counter;
-            printf("allred is: %i and counter is: %i\nResult is: %i\n", allRed, counter, red);
+            int red = channelAdd.rgbtRed / counter;
+            int green = channelAdd.rgbtGreen / counter;
+            int blue = channelAdd.rgbtBlue / counter;
+            printf("allred is: %i and counter is: %i\nResult is: %i\n", channelAdd.rgbtRed, counter, red);
 
             image[i][j].rgbtRed = red;
             image[i][j].rgbtGreen = green;
