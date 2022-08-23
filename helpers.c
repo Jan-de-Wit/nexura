@@ -60,9 +60,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             int counter = 0;
             int n = i + 1;
             int m = j + 1;
-            float allRed = 0;
-            float allGreen = 0;
-            float allBlue = 0;
+            int allRed = 0;
+            int allGreen = 0;
+            int allBlue = 0;
 
             //Iterates through 3x3 box row
             for (int k = i - 1; k <= n; k++)
