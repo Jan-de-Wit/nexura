@@ -70,16 +70,16 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 //Iterates through 3x3 box column
                 for (int l = j - 1; l <= m; l++)
                 {
-                    //Checks if k or l is inside the array range
-                    if (k > 0 && k < height && l >= 0 && l <= width)
-                    {
-                        //Adds channel values to a variable
-                        allRed += orgImage[k][l].rgbtRed;
-                        allGreen += orgImage[k][l].rgbtGreen;
-                        allBlue += orgImage[k][l].rgbtBlue;
-                        counter++;
-                        printf("Added %i, total is now: %i\n", orgImage[k][l].rgbtRed, allRed);
-                    }
+                    // //Checks if k or l is inside the array range
+                    // if (k > 0 && k < height && l >= 0 && l <= width)
+                    // {
+                    //Adds channel values to a variable
+                    allRed += orgImage[k][l].rgbtRed;
+                    allGreen += orgImage[k][l].rgbtGreen;
+                    allBlue += orgImage[k][l].rgbtBlue;
+                    counter++;
+                    printf("Added %i, total is now: %i\n", orgImage[k][l].rgbtRed, allRed);
+                    // }
                 }
             }
 
