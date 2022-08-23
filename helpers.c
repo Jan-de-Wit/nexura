@@ -77,6 +77,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                             channelAdd.rgbtRed += orgImage[row[y]][column[x]].rgbtRed;
                             channelAdd.rgbtGreen += orgImage[row[y]][column[x]].rgbtGreen;
                             channelAdd.rgbtBlue += orgImage[row[y]][column[x]].rgbtBlue;
+                            printf("orgRed = %i, total now: %i\n", orgImage[row[y]][column[x]].rgbtRed, channelAdd.rgbtRed);
 
                             counter++;
                         }
