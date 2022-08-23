@@ -76,7 +76,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                             allRed += orgImage[row[y]][column[x]].rgbtRed;
                             allGreen += orgImage[row[y]][column[x]].rgbtGreen;
                             allBlue += orgImage[row[y]][column[x]].rgbtBlue;
-                            printf("orgRed = %i, total now: %i\n", orgImage[row[y]][column[x]].rgbtRed, allRed);
+                            printf("orgRed = %i, total now: %i###", orgImage[row[y]][column[x]].rgbtRed, allRed);
 
                             counter++;
                         }
@@ -87,7 +87,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             int red = round(allRed / counter);
             int green = round(allGreen / counter);
             int blue = round(allBlue / counter);
-            // printf("allred is: %i and counter is: %i\nResult is: %i\n", allRed, counter, red);
+            printf("allred is: %i and counter is: %f $$$$Result is: %i????", allRed, counter, red);
 
             image[i][j].rgbtRed = red;
             image[i][j].rgbtGreen = green;
