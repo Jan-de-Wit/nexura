@@ -85,7 +85,6 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             int red = allRed / counter;
             int green = allGreen / counter;
             int blue = allBlue / counter;
-            printf("Counter is: %i", counter);
 
             image[i][j].rgbtRed = red;
             image[i][j].rgbtGreen = green;
