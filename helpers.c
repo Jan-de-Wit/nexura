@@ -163,15 +163,15 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             int gGreen = round((GxGreen * GxGreen) + (GyGreen * GyGreen));
             int gBlue = round((GxBlue * GxBlue) + (GyBlue * GyBlue));
 
-            // printf("GxR: %f, GyR: %f\n", GxRed, GyRed);
-            // printf("###R: %i, G: %i & B: %i\n", gRed, gGreen, gBlue);
-
+            printf("GxR: %f, GyR: %f", GxRed, GyRed);
+            printf("GxG: %f, GyG: %f", GxGreen, GyGreen);
+            printf("GxB: %f, GyB: %f", GxBlue, GyBlue);
 
             if (gRed > 255)
             {
                 gRed = 255;
             }
-            if (gRed < 0)
+            else if (gRed < 0)
             {
                 gRed = 0;
             }
@@ -179,7 +179,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             {
                 gGreen = 255;
             }
-            if (gGreen < 0)
+            else if (gGreen < 0)
             {
                 gGreen = 0;
             }
@@ -187,7 +187,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             {
                 gBlue = 255;
             }
-            if (gBlue < 0)
+            else if (gBlue < 0)
             {
                 gBlue = 0;
             }
@@ -196,7 +196,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             image[i][j].rgbtGreen = gGreen;
             image[i][j].rgbtBlue = gBlue;
 
-            // printf("$$$R: %i, G: %i & B: %i\n", gRed, gGreen, gBlue);
+            printf("$$$R: %i, G: %i & B: %i\n", gRed, gGreen, gBlue);
         }
     }
     return;
