@@ -78,6 +78,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                         allGreen += orgImage[k][l].rgbtGreen;
                         allBlue += orgImage[k][l].rgbtBlue;
                         counter++;
+                        printf("Added %i, total is now: %i\n", orgImage[k][l].rgbtRed, allRed);
                     }
                 }
             }
