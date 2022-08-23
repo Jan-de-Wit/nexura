@@ -52,10 +52,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     }
 
     //Iterates through every row
-    for (int i = 0; i < height; i++)
+    for (int i = 0; i <= height; i++)
     {
         //Iterates through every column
-        for (int j = 0; j < width; j++)
+        for (int j = 0; j <= width; j++)
         {
             float counter = 0;
             int allRed = 0;
@@ -71,7 +71,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 {
                     if (row[y] >= 0 && row[y] <= height)
                     {
-                        if (column[x] >= 0 && column[x] <= width)
+                        if (column[x] >= 0 && column[x] <= width - 1)
                         {
                             allRed += orgImage[row[y]][column[x]].rgbtRed;
                             allGreen += orgImage[row[y]][column[x]].rgbtGreen;
@@ -85,7 +85,11 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             int red = round(allRed / counter);
             int green = round(allGreen / counter);
             int blue = round(allBlue / counter);
-            // printf("allred is: %i and counter is: %f $$$$Result is: %i????", allRed, counter, red);
+
+            if (j == width - 1)
+            {
+                printf("allred is: %i and counter is: %f $$$$Result is: %i????\n", allRed, counter, red);
+            }
 
             image[i][j].rgbtRed = red;
             image[i][j].rgbtGreen = green;
