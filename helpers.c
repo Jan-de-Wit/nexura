@@ -110,13 +110,13 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     int GxValue[] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
     int GyValue[] = {-1, -2, -1, 0, 0, 0, -1, -2, -1};
 
-    for (int i = 0; i < height; i++)
+    //Iterates through every row
+    for (int i = 0; i <= height; i++)
     {
-        for (int j = 0; j < width; j++)
+        //Iterates through every column
+        for (int j = 0; j <= width; j++)
         {
-            int counter = 0;
-            int n = i + 1;
-            int m = j + 1;
+            float counter = 0;
 
             int GxRed = 0;
             int GxGreen = 0;
@@ -126,24 +126,27 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             int GyGreen = 0;
             int GyBlue = 0;
 
-            for (int k = i - 1; k <= n; k++)
+            int row[] = {i - 1, i, i + 1, i - 1, i, i + 1, i - 1, i, i + 1};
+            int column[] = {j - 1, j, j + 1, j - 1, j, j + 1, j - 1, j, j + 1};
+
+            for (int y = 0; y < 3; y++)
             {
-                if (k >= 0 || k <= height)
+                for (int x = 0; x < 3; x++)
                 {
-                    for (int l = j - 1; l <= m; l++)
+                    if (row[y] >= 0 && row[y] <= height - 1)
                     {
-                        if (l >= 0 || l <= width)
+                        if (column[x] >= 0 && column[x] <= width - 1)
                         {
-                            int GxFactor = GxValue[counter];
-                            int GyFactor = GyValue[counter];
+                            int GxFactor = GxValue[(int)counter];
+                            int GyFactor = GyValue[(int)counter];
 
-                            GxRed += orgImage[k][l].rgbtRed  * GxFactor;
-                            GxGreen += orgImage[k][l].rgbtGreen * GxFactor;
-                            GxBlue += orgImage[k][l].rgbtBlue * GxFactor;
+                            GxRed += orgImage[row[y]][column[x]].rgbtRed * GxFactor;
+                            GxGreen += orgImage[row[y]][column[x]].rgbtGreen * GxFactor;
+                            GxBlue += orgImage[row[y]][column[x]].rgbtBlue * GxFactor;
 
-                            GyRed += orgImage[k][l].rgbtRed  * GyFactor;
-                            GyGreen += orgImage[k][l].rgbtGreen * GyFactor;
-                            GyBlue += orgImage[k][l].rgbtBlue * GyFactor;
+                            GyRed += orgImage[row[y]][column[x]].rgbtRed * GyFactor;
+                            GyGreen += orgImage[row[y]][column[x]].rgbtGreen * GyFactor;
+                            GyBlue += orgImage[row[y]][column[x]].rgbtBlue * GyFactor;
 
                             counter++;
                         }
@@ -152,10 +155,10 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                             counter++;
                         }
                     }
-                }
-                else
-                {
-                    counter += 3;
+                    else
+                    {
+                        counter+= 3;
+                    }
                 }
             }
 
