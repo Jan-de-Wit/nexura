@@ -144,7 +144,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                             GyRed += (orgImage[row[y]][column[x]].rgbtRed * GyValue[counter]);
                             GyGreen += (orgImage[row[y]][column[x]].rgbtGreen * GyValue[counter]);
                             GyBlue += (orgImage[row[y]][column[x]].rgbtBlue * GyValue[counter]);
-                            // printf("GxR: %f, GyR: %f counter: %i", GxRed, GyRed, counter);
 
                             counter++;
                         }
@@ -159,6 +158,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                     }
                 }
             }
+            printf("$$$xR: %f, yR: %f", GxRed, GyRed);
 
             int gRed = (GxRed * GxRed) + (GyRed * GyRed);
             int gGreen = (GxGreen * GxGreen) + (GyGreen * GyGreen);
@@ -193,7 +193,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             image[i][j].rgbtGreen = gGreen;
             image[i][j].rgbtBlue = gBlue;
 
-            printf("$$$R: %i, G: %i & B: %i\n", gRed, gGreen, gBlue);
         }
     }
     return;
