@@ -118,29 +118,35 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
         {
             int counter = 0;
 
-            float GxRed = 0;
-            float GxGreen = 0;
-            float GxBlue = 0;
+            double GxRed = 0;
+            double GxGreen = 0;
+            double GxBlue = 0;
 
-            float GyRed = 0;
-            float GyGreen = 0;
-            float GyBlue = 0;
+            double GyRed = 0;
+            double GyGreen = 0;
+            double GyBlue = 0;
 
             int row[] = {i - 1, i, i + 1, i - 1, i, i + 1, i - 1, i, i + 1};
             int column[] = {j - 1, j, j + 1, j - 1, j, j + 1, j - 1, j, j + 1};
 
+            //Loops through rows of the 3x3
             for (int y = 0; y < 3; y++)
             {
+                //Loops through columns of the 3x3
                 for (int x = 0; x < 3; x++)
                 {
+                    //Checks if the pixel is out of bounds (y)
                     if (row[y] >= 0 && row[y] <= height - 1)
                     {
+                        //Checks if the pixel is out of bounds (x)
                         if (column[x] >= 0 && column[x] <= width - 1)
                         {
+                            //Adds channel values multiplied by GxKernel to a variable
                             GxRed += (orgImage[row[y]][column[x]].rgbtRed * GxValue[counter]);
                             GxGreen += (orgImage[row[y]][column[x]].rgbtGreen * GxValue[counter]);
                             GxBlue += (orgImage[row[y]][column[x]].rgbtBlue * GxValue[counter]);
 
+                            //Adds channel values multiplied by GyKernel to a variable
                             GyRed += (orgImage[row[y]][column[x]].rgbtRed * GyValue[counter]);
                             GyGreen += (orgImage[row[y]][column[x]].rgbtGreen * GyValue[counter]);
                             GyBlue += (orgImage[row[y]][column[x]].rgbtBlue * GyValue[counter]);
@@ -160,9 +166,9 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             }
             printf("$$$xR: %f, yR: %f", GxRed, GyRed);
 
-            int gRed = (GxRed * GxRed) + (GyRed * GyRed);
-            int gGreen = (GxGreen * GxGreen) + (GyGreen * GyGreen);
-            int gBlue = (GxBlue * GxBlue) + (GyBlue * GyBlue);
+            int gRed = sqrt((GxRed * GxRed) + (GyRed * GyRed));
+            int gGreen = sqrt((GxGreen * GxGreen) + (GyGreen * GyGreen));
+            int gBlue = sqrt((GxBlue * GxBlue) + (GyBlue * GyBlue));
 
             if (gRed > 255)
             {
