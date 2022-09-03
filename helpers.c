@@ -155,7 +155,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                     }
                     else
                     {
-                        counter+= 3;
+                        counter++;
                     }
                 }
             }
