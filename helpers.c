@@ -166,9 +166,9 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             }
 
             //Does the calculation of new channel values: √(Gx^2 + Gy^2)
-            int gRed = sqrt((GxRed * GxRed) + (GyRed * GyRed));
-            int gGreen = sqrt((GxGreen * GxGreen) + (GyGreen * GyGreen));
-            int gBlue = sqrt((GxBlue * GxBlue) + (GyBlue * GyBlue));
+            int gRed = round(sqrt((GxRed * GxRed) + (GyRed * GyRed)));
+            int gGreen = round(sqrt((GxGreen * GxGreen) + (GyGreen * GyGreen)));
+            int gBlue = round(sqrt((GxBlue * GxBlue) + (GyBlue * GyBlue)));
 
             //Checks if values are < 0 or > 255 and sets them to the nearest value
             if (gRed > 255)
