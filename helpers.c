@@ -144,7 +144,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                             GyRed += (orgImage[row[y]][column[x]].rgbtRed * GyValue[counter]);
                             GyGreen += (orgImage[row[y]][column[x]].rgbtGreen * GyValue[counter]);
                             GyBlue += (orgImage[row[y]][column[x]].rgbtBlue * GyValue[counter]);
-                            printf("GxR: %f, GyR: %f counter: %i", GxRed, GyRed, counter);
+                            // printf("GxR: %f, GyR: %f counter: %i", GxRed, GyRed, counter);
 
                             counter++;
                         }
