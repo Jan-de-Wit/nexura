@@ -159,9 +159,11 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-            int gRed = round((GxRed * GxRed) + (GyRed * GyRed));
-            int gGreen = round((GxGreen * GxGreen) + (GyGreen * GyGreen));
-            int gBlue = round((GxBlue * GxBlue) + (GyBlue * GyBlue));
+            printf("Counter is %i", counter);
+
+            int gRed = (GxRed * GxRed) + (GyRed * GyRed);
+            int gGreen = (GxGreen * GxGreen) + (GyGreen * GyGreen);
+            int gBlue = (GxBlue * GxBlue) + (GyBlue * GyBlue);
 
             printf("GxR: %f, GyR: %f", GxRed, GyRed);
             printf("GxG: %f, GyG: %f", GxGreen, GyGreen);
