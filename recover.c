@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <cs50.h>
 
 typedef uint8_t BYTE;
 
 int main(int argc, char *argv[])
 {
+    //Checks if theres more/less than 2 commandline arguments
     if (argc != 2)
     {
         printf("Usage: ./recover IMAGE\n");
@@ -16,78 +18,50 @@ int main(int argc, char *argv[])
     {
         int BLOCKSIZE = 512;
         FILE *raw = fopen(argv[1], "r");
-        int fileCount = -1;
-        BYTE *buffer = malloc(512);
+        int fileCount = 0;
+        BYTE buffer[512];
+        FILE *img;
+        bool newImage = NULL;
 
         while (fread(buffer, 1, BLOCKSIZE, raw) == BLOCKSIZE)
         {
-            int newImage = 2;
-
-            if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff)
+            //Checks if it identifies the start of a new image
+            if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && buffer[3] >= 0xe0 && buffer[3] <= 0xef)
             {
-                if (buffer[3] >= 0xe0 && buffer[3] <= 0xef)
+                //Checks if there was already an jpeg opened
+                if (newImage == true)
                 {
-                    newImage = 1;
+                    fclose(img);
+                    fileCount++;
                 }
-            }
+                newImage = true;
 
-            if (newImage == 1)
-            {
-                //Open new file and start writing in there
-                fileCount++;
-
+                //Counts amount of digits in fileCount
                 int temp = fileCount;
-
                 int lenFC = 0;
+
                 while (temp != 0)
                 {
                     temp /= 10;
                     lenFC++;
                 }
 
+                //Creates the new file name
                 char filename[lenFC + 1];
-
                 sprintf(filename, "%.3d.jpg", fileCount);
 
-
-                FILE *newJpg = fopen(filename, "w");
-
-                if (newJpg == NULL)
-                {
-                    printf("honing is lekker %s\n", filename);
-                }
-
-                fwrite(buffer, 1, BLOCKSIZE, newJpg);
-
-                fclose(newJpg);
+                //Opens and writes to the new file
+                img = fopen(filename, "w");
+                fwrite(buffer, 1, BLOCKSIZE, img);
             }
-            else if (newImage == 0)
+            else if (newImage == true)
             {
-                //Continue writing in the same file
-                int lenFC = 0;
-                while (fileCount != 0)
-                {
-                    fileCount /= 10;
-                    lenFC++;
-                }
-
-                char filename[lenFC + 1];
-
-                sprintf(filename, "%.3d.jpg", fileCount);
-
-                FILE *jpg = fopen(filename, "w");
-
-                if (jpg == NULL)
-                {
-                    printf("honing is lekker %s\n", filename);
-                }
-
-                fwrite(buffer, 1, BLOCKSIZE, jpg);
-
-                fclose(jpg);
+                //Writes to the file
+                fwrite(buffer, 1, BLOCKSIZE, img);
             }
         }
-        free(buffer);
+        //Closes image and ends the program
+        fclose(img);
         return 0;
     }
 }
