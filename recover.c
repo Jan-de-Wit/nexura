@@ -14,8 +14,6 @@ int main(int argc, char *argv[])
     }
     else
     {
-        return 0;
-
         int BLOCKSIZE = 512;
         FILE *raw = fopen(argv[1], "r");
         int fileCount = -1;
@@ -49,10 +47,15 @@ int main(int argc, char *argv[])
 
                 char filename[lenFC + 1];
 
-
                 sprintf(filename, "%.3d.jpg", fileCount);
 
+
                 FILE *newJpg = fopen(filename, "w");
+
+                if (newJpg == NULL)
+                {
+                    printf("honing is lekker %s\n", filename);
+                }
 
                 fwrite(buffer, 1, BLOCKSIZE, newJpg);
 
@@ -73,6 +76,11 @@ int main(int argc, char *argv[])
                 sprintf(filename, "%.3d.jpg", fileCount);
 
                 FILE *jpg = fopen(filename, "w");
+
+                if (jpg == NULL)
+                {
+                    printf("honing is lekker %s\n", filename);
+                }
 
                 fwrite(buffer, 1, BLOCKSIZE, jpg);
 
