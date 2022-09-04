@@ -14,6 +14,8 @@ int main(int argc, char *argv[])
     }
     else
     {
+        return 0;
+
         int BLOCKSIZE = 512;
         FILE *raw = fopen(argv[1], "r");
         int fileCount = -1;
@@ -78,5 +80,6 @@ int main(int argc, char *argv[])
             }
         }
         free(buffer);
+        return 0;
     }
 }
