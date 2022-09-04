@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     {
         int BLOCKSIZE = 512;
         FILE *raw = fopen(argv[1], "r");
-        int fileCount = 0;
+        int fileCount = -1;
         BYTE *buffer = malloc(512);
 
         while (fread(buffer, 1, BLOCKSIZE, raw) == BLOCKSIZE)
@@ -47,13 +47,12 @@ int main(int argc, char *argv[])
 
                 char filename[lenFC + 1];
 
-                sprintf(filename, "%i.jpg", fileCount);
+
+                sprintf(filename, "%.3d.jpg", fileCount);
 
                 FILE *newJpg = fopen(filename, "w");
 
                 fwrite(buffer, 1, BLOCKSIZE, newJpg);
-
-                printf("fileCount is now %i times\n", fileCount);
 
                 fclose(newJpg);
             }
@@ -69,7 +68,7 @@ int main(int argc, char *argv[])
 
                 char filename[lenFC + 1];
 
-                sprintf(filename, "%i.jpg", fileCount);
+                sprintf(filename, "%.3d.jpg", fileCount);
 
                 FILE *jpg = fopen(filename, "w");
 
