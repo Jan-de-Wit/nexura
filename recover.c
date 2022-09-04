@@ -62,6 +62,7 @@ int main(int argc, char *argv[])
         }
         //Closes image and ends the program
         fclose(img);
+        fclose(raw);
         return 0;
     }
 }
