@@ -4,6 +4,7 @@
 #define DICTIONARY_H
 
 #include <stdbool.h>
+#include <stdint.h>
 
 // Maximum length for a word
 // (e.g., pneumonoultramicroscopicsilicovolcanoconiosis)
@@ -18,10 +19,11 @@ typedef struct node
 node;
 
 // Prototypes
-bool check(const char *word);
-unsigned int hash(const char *word);
-void setAddress(node *parent, node *newNode);
+bool inBucket(node *parent, const char *word, int counter);
+bool check(char *word);
+uint32_t hash(const char *str);
 bool load(const char *dictionary);
+int countBucket(node *address);
 unsigned int size(void);
 bool unload(void);
 
