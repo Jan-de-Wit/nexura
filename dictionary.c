@@ -46,15 +46,17 @@ bool inBucket(node *parent, const char *word, int counter)
 // Returns true if word is in dictionary, else false
 bool check(char *word)
 {
-    // int wordLength = strlen(word);
+    char wordHash[LENGTH + 1];
+    int wordLength = strlen(word);
 
-    // for (int i = 0; i < wordLength; i++)
-    // {
-    //     char c = tolower(word[i]);
-    //     word[i] = c;
-    // }
+    for (int i = 0; i < wordLength; i++)
+    {
+        char c = tolower(word[i]);
+        wordHash[i] = c;
+    }
+    wordHash[wordLength] = '\0';
 
-    uint32_t hashIndex = hash(word);
+    uint32_t hashIndex = hash(wordHash);
     hashIndex /= 0x45ed0;
 
     if (hashIndex < 0)
