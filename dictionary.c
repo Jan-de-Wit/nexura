@@ -92,10 +92,13 @@ uint32_t hash(const char *str)
     unsigned int byte, crc, mask;
     int i = 0, j;
     crc = 0xFFFFFFFF;
-    while (str[i] != 0) {
+    while (str[i] != 0)
+    {
         byte = str[i];
         crc = crc ^ byte;
-        for (j = 7; j >= 0; j--) {
+        
+        for (j = 7; j >= 0; j--)
+        {
             mask = -(crc & 1);
             crc = (crc >> 1) ^ (0xEDB88320 & mask);
         }
@@ -168,7 +171,7 @@ int countBucket(node *address)
     {
         //Adds a word to the counter and recalls itselves
         counter++;
-        counter+= countBucket(address->next);
+        counter += countBucket(address->next);
     }
 
     return counter;
