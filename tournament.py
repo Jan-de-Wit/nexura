@@ -19,7 +19,7 @@ def main():
     with open(sys.argv[1], "r") as file:
         reader = csv.DictReader(file)
 
-        #Store each team as a dictionary in a list of teams
+        # Store each team as a dictionary in a list of teams
         for team in reader:
             team["rating"] = int(team["rating"])
             teams.append(team)
@@ -67,6 +67,7 @@ def simulate_tournament(teams):
         teams = simulate_round(teams)
 
     return teams[0]["team"]
+
 
 if __name__ == "__main__":
     main()
