@@ -38,36 +38,37 @@ for i in range(lengthInput):
 finalSum = normalSum + multipliedSum
 
 if finalSum % 10 != 0:
-    print("INVALIDS")
+    print("INVALID")
     exit()
 
-ccStart = f"{input[0]} + {input[1]}"
+ccStart = f"{rawInput[0]}{rawInput[1]}"
 
 if lengthInput == 15:
 
     if ccStart == "34" or ccStart == "37":
         print("AMEX")
-
+        exit()
     else:
         print("INVALID")
-
+        exit()
 elif lengthInput == 13:
 
     if ccStart[0] == "4":
         print("VISA")
-
+        exit()
     else:
         print("INVALID")
-
+        exit()
 elif lengthInput == 16:
-
     if int(ccStart) >= 51 and int(ccStart) <= 55:
-        print("AMEX")
-
+        print("MASTERCARD")
+        exit()
     elif ccStart[0] == "4":
         print("VISA")
-
+        exit()
     else:
         print("INVALID")
+        exit()
 else:
     print("INVALID")
+    exit()
