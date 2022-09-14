@@ -35,14 +35,15 @@ for i in range(lengthInput):
         for d in str(multiplied):
             multipliedSum += int(d)
 
+# Checks whether last digit in the sum is a 0
 finalSum = normalSum + multipliedSum
-
 if finalSum % 10 != 0:
     print("INVALID")
     exit()
 
 ccStart = f"{rawInput[0]}{rawInput[1]}"
 
+# Checks whether length and first digits matches matches
 if lengthInput == 15:
 
     if ccStart == "34" or ccStart == "37":
