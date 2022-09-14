@@ -42,13 +42,10 @@ if finalSum % 10 != 0:
     exit()
 
 ccStart = f"{input[0]} + {input[1]}"
-ccStartAE = ["34", "37"]
-ccStartVISA = ["4"]
-ccStartMC = ["51", "52", "53", "54", "55"]
 
 if lengthInput == 15:
 
-    if ccStart in ccStartAE:
+    if ccStart == "34" or ccStart == "37":
         print("AMEX")
 
     else:
@@ -56,7 +53,7 @@ if lengthInput == 15:
 
 elif lengthInput == 13:
 
-    if ccStart[0] in ccStartVISA:
+    if ccStart[0] == "4":
         print("VISA")
 
     else:
@@ -64,10 +61,10 @@ elif lengthInput == 13:
 
 elif lengthInput == 16:
 
-    if ccStart in ccStartMC:
+    if int(ccStart) >= 51 and int(ccStart) <= 55:
         print("AMEX")
 
-    elif ccStart[0] in ccStartVISA:
+    elif ccStart[0] == "4":
         print("VISA")
 
     else:
