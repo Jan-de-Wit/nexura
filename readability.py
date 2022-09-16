@@ -20,7 +20,7 @@ for index in range(len(input)):
     elif char.isspace() == 1:
         wordCount += 1
     # Checks if the character is a punctuation character which isn't a comma
-    elif char in string.punctuation and c != ',':
+    elif char in string.punctuation and char != ',':
         sentenceCount += 1
 
 # Gets the average amount of letters per 100 words
