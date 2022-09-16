@@ -1,9 +1,9 @@
 from cs50 import get_string
-import string
 
 # Prompts the user for a text
 input = get_string("Text: ")
 
+punctuation = [".", "!", "?"]
 letterCount = 0
 wordCount = 1
 sentenceCount = 0
@@ -20,7 +20,7 @@ for index in range(len(input)):
     elif char.isspace() == 1:
         wordCount += 1
     # Checks if the character is a punctuation character which isn't a comma
-    elif char in string.punctuation and char != ',':
+    elif char in punctuation:
         sentenceCount += 1
 
 # Gets the average amount of letters per 100 words
