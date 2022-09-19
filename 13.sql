@@ -1,5 +1,5 @@
 -- Outputs the names of all people who starred in a movie in which Kevin Bacon also starred
-SELECT COUNT(name) FROM people
+SELECT name FROM people
 WHERE id IN (
     -- Gets all person ids of who starred in a movie in which Kevin Bacon also starred
     SELECT person_id FROM stars
