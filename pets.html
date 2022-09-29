@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>Home</title>
+    </head>
+    <body>
+        <header class="container">
+            <nav class="navbar navbar-light bg-light fixed-top">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="index.html">About me</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">About Me</h5>
+                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="hobbies.html">Hobbies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="pets.html">Pets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="motivation.html">Motivation</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        <main>
+          <section>
+            <!--Image carousel and text with pictures of Lizzy-->
+            <div class="row mt-5 w-75 mx-auto text-center text-wrap">
+              <div class="col mt-5 align-middle">
+                <h1 class="display-3">Stripy</h1>
+                <p>This is my cat Stripy. He's about 5 years old and very loving. He really likes to get pets and cuddles, however food is also one of his main priorities. Most of the time he'll be somewhere around you, or he'll be sleeping somewhere in the house.</p>
+              </div>
+              <div class="col-4 ms-5">
+                <div id="stripyCarousel" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="IMG/stripy.jpg" class="d-block w-100" alt="Picture of my cat Stripy">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="IMG/stripy2.jpg" class="d-block w-100" alt="Picture of my cat Stripy">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="IMG/stripy3.jpg" class="d-block w-100" alt="Picture of my cat Stripy">
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#stripyCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#stripyCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Image carousel and text with pictures of Lizzy-->
+          <section>
+            <div class="row w-75 mx-auto text-center text-wrap mt-5">
+              <div class="col mt-5 align-middle">
+                <h1 class="display-3">Lizzy</h1>
+                <p>This is my other cat Lizzy. She's also 5 years old and also spends a lot of time with us. She likes to research whatever is new, or whats she thinks could be new, may it be a fly or a plant. She has moods in which she's really busy minding her own business, but some other times she really likes to get our attention.</p>
+              </div>
+              <div class="col-4 ms-5">
+                <div id="lizzyCarousel" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="IMG/lizzy.jpg" class="d-block w-100" alt="Picture of my cat Stripy">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="IMG/lizzy2.jpg" class="d-block w-100" alt="Picture of my cat Stripy">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="IMG/lizzy3.jpg" class="d-block w-100" alt="Picture of my cat Stripy">
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#lizzyCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#lizzyCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+        <footer class="w-100 text-center mt-5 pb-4">
+          <div class="text-center mx-auto text-break mt-4 d-inline-block">
+            <div class="row maxWidth">
+              <a href="https://www.twitter.com/icalvfx" class="col">
+                <img src="IMG/twitterlogo.png" alt="Twitter logo" width="40px" height="40px">
+              </a>
+              <p class="col lead mt-1 ms-3 me-3 align-middle">&copy Jan de Wit 2022</p>
+              <a href="https://www.youtube.com/channel/UCNhJmipj_YjgVziD2IVeB-g" class="col">
+                <img src="IMG/youtubelogo.svg" alt="YouTube logo" width="40px" height="40px">
+              </a>
+            </div>
+          </div>
+        </footer>
+    </body>
+</html>

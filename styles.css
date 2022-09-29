@@ -1,0 +1,30 @@
+.hr-faded-bt {
+    background-color: #E6E6E6;
+    background-image: linear-gradient(top, rgba(0,0,0,0.7), rgba(255,255,255,0));
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0.7), rgba(255,255,255,0));
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.7), rgba(255,255,255,0));
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.7), rgba(255,255,255,0));
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0.7), rgba(255,255,255,0));
+}
+.hr-faded-tb {
+    background-color: #F5F5DC;
+    background-image: linear-gradient(bottom, #F5F5DC, rgba(255,255,255,0));
+    background-image: -o-linear-gradient(bottom, #F5F5DC, rgba(255,255,255,0));
+    background-image: -moz-linear-gradient(bottom, #F5F5DC, rgba(255,255,255,0));
+    background-image: -webkit-linear-gradient(bottom, #F5F5DC, rgba(255,255,255,0));
+    background-image: -ms-linear-gradient(bottom, #F5F5DC, rgba(255,255,255,0));
+}
+footer {
+    background-color: #e9fce9;
+    border-radius: 25px 25px 0 0;
+}
+ul {
+    text-decoration: none;
+}
+.maxWidth {
+    width: 95vw;
+}
+#icon {
+    width: 40px;
+    height: 40px;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <title>Home</title>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <header class="container">
+            <nav class="navbar navbar-light bg-light fixed-top">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">About me</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">About Me</h5>
+                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="hobbies.html">Hobbies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pets.html">Pets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="motivation.html">Motivation</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        <main>
+            <!-- Image carousel with links to different pages -->
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <a href="hobbies.html">
+                        <img src="IMG/hockey.jpg" class="d-block w-100" alt="My hobbies">
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="btn btn-lg btn-primary btn-warning" href="hobbies.html" role="button">Hobbies >></a>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <a href="pets.html">
+                        <img src="IMG/cat.jpg" class="d-block w-100" alt="My pets">
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="btn btn-lg btn-primary btn-warning" href="pets.html" role="button">Pets >></a>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <a href="motivation.html">
+                        <img src="IMG/motivation.jpg" class="d-block w-100" alt="My motivation">
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="btn btn-lg btn-primary btn-warning" href="motivation.html" role="button">Motivation >></a>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              <!-- Information about me -->
+              <section class="w-100 h-75 d-inline-block max-width" style="background-color: #F5F5DC">
+                <hr class="py-1 mt-0 mb-5 p-0 hr-faded-bt">
+                <div class="w-50 col text-center mx-auto text-break mt-4">
+                  <h1 class="display-3 pb-2">About Me</h1>
+                  <p>Hello! I'm Jan de Wit and I'm from the Netherlands. As I'm making this, I'm still in high school, with only a couple of years left. I'm 14 years old and trying to pursue my dreams to become a succesfull person in life. That includes getting a good job, but also maintain social relationships and obviously finish school.</p>
+                  <button class="btn btn-primary btn-warning mb-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    Learn More >>
+                  </button>
+                </div>
+              </section>
+              <hr class="py-1 mt-0 p-0 hr-faded-tb">
+              <section class="w-100 h-75 mt-5 d-inline-block overflow-hidden">
+                <div class="row max-width mx-auto ps-3 pe-3">
+                  <div class="col-6 text-start text-break mt-4">
+                    <h1 class="display-3 pt-4 pb-2">My current job</h1>
+                    <p>Since the start of 2022 I've started to learn motion design. I've promoted my work on the social platforms: YouTube and Twitter, which has helped me reach the audience I wanted to reach. After months of promoting I finally got to the point where I could start pricing my work. And there I am now, getting a good monthly income, with less hours and easier work than my friends have.</p>
+                  </div>
+                  <div class="col-2 mx-auto">
+                    <figure class="figure">
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/xyiiJ-Q-9cU?start=4" alt="Video of my recent work" frameborder="0" autoplay muted allowfullscreen></iframe>
+                      <figcaption class="figure-caption text-center">An example of my work.</figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </section>
+        </main>
+        <footer class="w-100 text-center mt-5 pb-4">
+          <div class="text-center mx-auto text-break mt-4 d-inline-block">
+            <div class="row maxWidth">
+              <a href="https://www.twitter.com/icalvfx" class="col">
+                <img src="IMG/twitterlogo.png" alt="Twitter logo" width="40px" height="40px">
+              </a>
+              <p class="col lead mt-1 ms-3 me-3 align-middle">&copy Jan de Wit 2022</p>
+              <a href="https://www.youtube.com/channel/UCNhJmipj_YjgVziD2IVeB-g" class="col">
+                <img src="IMG/youtubelogo.svg" alt="YouTube logo" width="40px" height="40px">
+              </a>
+            </div>
+          </div>
+        </footer>
+    </body>
+</html>
