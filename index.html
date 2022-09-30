@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What is the approximate ratio of bikes to people in the Netherlands?</p>
+                <button type="submit" id="1answer1">4 bikes per 3 persons</button>
+                <button type="submit" id="1answer2">2 bikes per 1 person</button>
+                <button type="submit" id="1answer3">3 bikes per 2 persons</button>
+                <button type="submit" id="1answer4">2 bikes per 4 persons</button>
+                <p id="rightAnswerTextMC" style="display:none">Correct</p>
+                <p id="wrongAnswerTextMC" style="display:none">Incorrect</p>
+            </div>
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What is the capital city of the Netherlands?</h3>
+                <form id="freeAnswerForm">
+                    <input>
+                    <button type="submit" id="submitFreeResponse">Check Answer</button>
+                </form>
+                <p id="rightAnswerTextFA" style="display:none">Correct</p>
+                <p id="wrongAnswerTextFA" style="display:none">Incorrect</p>
+            </div>
+        </div>
+        <script>
+            const btn1 = document.getElementById('1answer1');
+            const btn2 = document.getElementById('1answer2');
+            const btn3 = document.getElementById('1answer3');
+            const btn4 = document.getElementById('1answer4');
+
+            const right = document.getElementById('rightAnswerTextMC');
+            const wrong = document.getElementById('wrongAnswerTextMC');
+
+            var textAlreadyThereMC = 0;
+
+            btn1.addEventListener('click', function onClick(event) {
+                event.target.style.backgroundColor = 'lime';
+                if (right.style.display === "none" && textAlreadyThere === 0) {
+                    right.style.display = "block";
+                    textAlreadyThereMC = 1;
+                }
+                else if (right.style.display === "none") {
+                    wrong.style.display  = "none";
+                    right.style.display = "block";
+                    textAlreadyThereMC = 1;
+                }
+            });
+            btn2.addEventListener('click', function onClick(event) {
+                event.target.style.backgroundColor = 'red';
+                if (wrong.style.display === "none" && textAlreadyThere === 0) {
+                    wrong.style.display = "block";
+                    textAlreadyThereMC = 1;
+                }
+                else if (wrong.style.display === "none") {
+                    right.style.display  = "none";
+                    wrong.style.display = "block";
+                    textAlreadyThereMC = 1;
+                }
+            });
+            btn3.addEventListener('click', function onClick(event) {
+                event.target.style.backgroundColor = 'red';
+                if (wrong.style.display === "none" && textAlreadyThere === 0) {
+                    wrong.style.display = "block";
+                    textAlreadyThereMC = 1;
+                }
+                else if (wrong.style.display === "none") {
+                    right.style.display  = "none";
+                    wrong.style.display = "block";
+                    textAlreadyThereMC = 1;
+                }
+            });
+            btn4.addEventListener('click', function onClick(event) {
+                event.target.style.backgroundColor = 'red';
+                if (wrong.style.display === "none" && textAlreadyThere === 0) {
+                    wrong.style.display = "block";
+                    textAlreadyThereMC = 1;
+                }
+                else if (wrong.style.display === "none") {
+                    right.style.display  = "none";
+                    wrong.style.display = "block";
+                    textAlreadyThereMC = 1;
+                }
+            });
+
+            const freeAnswerForm = document.getElementById('freeAnswerForm');
+            const rightFA = document.getElementById('rightAnswerTextFA');
+            const wrongFA = document.getElementById('wrongAnswerTextFA');
+            var textAlreadyThereFA = 0;
+
+            freeAnswerForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                response = freeAnswerForm.elements[0].value.trim().toLowerCase();
+                answer = "amsterdam";
+
+                if (response === answer && textAlreadyThereFA === 1)
+                {
+                    wrongFA.style.display = "none";
+                    rightFA.style.display = "block";
+                    textAlreadyThereFA = 1;
+                }
+                else if (response === answer)
+                {
+                    rightFA.style.display = "block";
+                    textAlreadyThereFA = 1;
+                }
+                else if (response != answer && textAlreadyThereFA === 1)
+                {
+                    rightFA.style.display = "none";
+                    wrongFA.style.display = "block";
+                    textAlreadyThereFA = 1;
+                }
+                else
+                {
+                    wrongFA.style.display = "block";
+                    textAlreadyThereFA = 1;
+                }
+            });
+        </script>
+    </body>
+</html>
