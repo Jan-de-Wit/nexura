@@ -271,7 +271,7 @@ def register():
         # Gets form data
         username = request.form.get('username')
         password = request.form.get('password')
-        passwordConfirmation = request.form.get('passwordConfirmation')
+        passwordConfirmation = request.form.get('confirmation')
         regEx = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
 
         # Verifies user input
