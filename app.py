@@ -106,11 +106,11 @@ def buy():
         try:
             stockAmount = int(request.form.get("shares"))
         except:
-            return apology("Stock amount isn't an integer", 403)
+            return apology("Stock amount isn't an integer", 400)
         if not stockSymbol:
-            return apology("Must provide stock symbol", 403)
+            return apology("Must provide stock symbol", 400)
         elif not stockAmount:
-            return apology("Must provide stock amount", 403)
+            return apology("Must provide stock amount", 400)
 
         # Looks up stock data
         resultLookup = lookup(stockSymbol)
@@ -121,7 +121,7 @@ def buy():
 
         # Checks if the user put in a positive number as stock amount
         if stockAmount < 1:
-            return apology("Amount of shares must be larger than 0", 403)
+            return apology("Amount of shares must be larger than 0", 400)
 
         # Calculates transaction amount
         stockPrice = resultLookup["price"]
@@ -133,7 +133,7 @@ def buy():
 
         # Checks if query was successful
         if len(resultCashDBQuery) != 1:
-            return apology("User not found", 403)
+            return apology("User not found", 400)
 
         # Calculates remaining cash
         cash = int(resultCashDBQuery[0]["cash"])
@@ -141,7 +141,7 @@ def buy():
 
         # Checks if theres enough money for the transaction
         if cashLeft < 0:
-            return apology("Not enough money in your account", 403)
+            return apology("Not enough money in your account", 400)
 
         # Adds the transaction into transaction database
         transferDate = datetime.now()
@@ -202,18 +202,18 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("must provide password", 400)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
+            return apology("invalid username and/or password", 400)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -247,14 +247,14 @@ def quote():
 
         # Verifies user input
         if not stockSymbol:
-            return apology("Must provide stock symbol", 403)
+            return apology("Must provide stock symbol", 400)
 
         # Lookup of the stockSymbol
         resultLookup = lookup(stockSymbol)
 
         # Checks if the lookup was unsuccessful
         if resultLookup == None:
-            return apology("Stock symbol not found", 403)
+            return apology("Stock symbol not found", 400)
         else:
             # Renders webpage with table of stockdata
             return render_template("quoted.html", stockname=resultLookup["name"], stockprice=usd(resultLookup["price"]), stocksymbol=stockSymbol)
@@ -276,15 +276,15 @@ def register():
 
         # Verifies user input
         if not username:
-            return apology("Must provide username", 403)
+            return apology("Must provide username", 400)
         elif not password:
-            return apology("Must provide password", 403)
+            return apology("Must provide password", 400)
         elif not passwordConfirmation:
-            return apology("Must repeat your password", 403)
+            return apology("Must repeat your password", 400)
         elif passwordConfirmation != password:
-            return apology("Passwords don't match", password)
+            return apology("Passwords don't match", 400)
         elif not fullmatch(regEx, password):
-            return apology("Password must be at least 8 characters and use at least one digit, special character, lower and uppercase English letter", 403)
+            return apology("Password must be at least 8 characters and use at least one digit, special character, lower and uppercase English letter", 400)
         else:
             # Hashes password
             pwHash = generate_password_hash(password)
@@ -294,7 +294,7 @@ def register():
 
             rows = db.execute("SELECT * FROM users WHERE username =? AND hash=?;", username, pwHash)
             if len(rows) != 1 or not check_password_hash(rows[0]["hash"], password):
-                return apology("This username has already been taken", 403)
+                return apology("This username has already been taken", 400)
 
             # Sets session
             session["user_id"] = rows[0]["id"]
@@ -317,21 +317,21 @@ def sell():
         try:
             sharesAmount = int(request.form.get("shares"))
         except:
-            return apology("Shares amount isn't an integer", 403)
+            return apology("Shares amount isn't an integer", 400)
 
         if not stockSymbol:
-            return apology("Must provide stock symbol", 403)
+            return apology("Must provide stock symbol", 400)
         elif not sharesAmount:
-            return apology("Must provide an amount of shares", 403)
+            return apology("Must provide an amount of shares", 400)
         elif sharesAmount < 1:
-            return apology("Amount of shares must be larger than 1", 403)
+            return apology("Amount of shares must be larger than 1", 400)
 
         # Queries database for amount of owned shares
         checkOwnedStocksQuery = db.execute("SELECT StockAmount FROM OwnedStocks WHERE PersonID=? AND StockSymbol=?", uid, stockSymbol)
 
         # Checks if the user has any shares
         if len(checkOwnedStocksQuery) != 1:
-            return apology("You can't sell something which you don't own", 403)
+            return apology("You can't sell something which you don't own", 400)
 
         # Calculates how many shares the user has left after selling
         ownedStockAmount = int(checkOwnedStocksQuery[0]["StockAmount"])
@@ -339,7 +339,7 @@ def sell():
 
         # Checks if the user doesn't have enough shares
         if ownedStockAmountLeft < 0:
-            return apology("You can't sell more stocks than you own", 403)
+            return apology("You can't sell more stocks than you own", 400)
 
         # Adds the transaction into transaction database
         transferDate = datetime.now()
