@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy stocks
+{% endblock %}
+
+{% block main %}
+    <h2 class="display-2 mb-4">Transaction successful</h2>
+    <table class="table table-hover w-50 mx-auto mb-3">
+        <thead>
+            <tr>
+                <th scope="col">Stock name</th>
+                <th scope="col">Stock price</th>
+                <th scope="col">Stock amount</th>
+                <th scope="col">Total price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ stockSymbol }}</td>
+                <td>{{ stockPrice }}</td>
+                <td>{{ stockAmount }}</td>
+                <td>{{ transactionAmount }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/buy">
+        <button class="btn btn-primary">Return to buying</button>
+    </a>
+{% endblock %}
