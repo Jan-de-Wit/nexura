@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stock quote
+{% endblock %}
+
+{% block main %}
+    <h2>{{ stocksymbol }}</h2>
+    <table class="table table-hover w-50 mx-auto">
+        <thead>
+            <tr>
+                <th scope="col">Stock name</th>
+                <th scope="col">Stock price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ stockname }}</td>
+                <td>{{ stockprice }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

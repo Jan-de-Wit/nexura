@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stock portfolio
+{% endblock %}
+
+{% block main %}
+    <h2 class="display-2 mb-4">Stock portfolio</h2>
+
+    <table class="table table-hover w-50 mx-auto mb-3 align-middle">
+        <thead>
+            <tr>
+                <th scope="col">Stock name</th>
+                <th scope="col">Stock price</th>
+                <th scope="col">Stock amount</th>
+                <th scope="col">Total worth</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(amountDifferentStocks) %}
+            <tr>
+                <td>{{ stockUserData["symbol"][i] }}</td>
+                <td>{{ stockUserData["price"][i] }}</td>
+                <td>{{ stockUserData["amount"][i] }}</td>
+                <td>{{ stockUserData["worthTotal"][i] }}</td>
+                <td style="width:30%">
+                    <form action="/sell" method="POST">
+                        <div class="row me-4 justify-content-sm-end">
+                            <input autocomplete="off" class="form-control w-25 me-2" id="stockAmount" name="shares" placeholder="#" type="number" min="1" max="{{ stockUserData['amount'][i] }}" required>
+                            <button class="btn btn-primary w-25" type="submit" name="symbol" value="{{ stockUserData['symbol'][i] }}">Sell</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="row w-25 mx-auto mb-5">
+        <div class="col">
+            <a href="/buy">
+                <button class="btn btn-primary">Buy stocks</button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="/sell">
+                <button class="btn btn-primary">Sell stocks</button>
+            </a>
+        </div>
+    </div>
+    <div class="row w-50 mx-auto">
+        <div class="col">
+            <p><b>Cash</b>: {{ cash }}</p>
+        </div>
+    </div>
+    <div class="row w-50 mx-auto">
+        <div class="col">
+            <p><b>Total worth of all stocks</b>: {{ totalWorthStocks }}</p>
+        </div>
+    </div>
+
+{% endblock %}
