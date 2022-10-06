@@ -117,7 +117,7 @@ def buy():
 
         # Checks if the stock symbol is valid
         if resultLookup == None:
-            return apology("Stock symbol not found", 403)
+            return apology("Stock symbol not found", 400)
 
         # Checks if the user put in a positive number as stock amount
         if stockAmount < 1:
@@ -167,7 +167,7 @@ def buy():
             # Adds new row into database with the stock amount
             db.execute("INSERT INTO OwnedStocks (PersonID, StockSymbol, StockAmount) VALUES (?,?,?);", uid, stockSymbol, stockAmount)
 
-        return render_template("bought.html", stockSymbol=stockSymbol, stockPrice=usd(stockPrice), stockAmount=stockAmount, transactionAmount=usd(transactionAmount))
+        return render_template("bought.html", stockSymbol=stockSymbol, stockPrice=usd(stockPrice), stockAmount=stockAmount, transactionAmount=transactionAmount)
     else:
         return render_template("buy.html")
 
