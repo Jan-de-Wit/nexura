@@ -146,7 +146,8 @@ def buy():
         # Adds the transaction into transaction database
         transferDate = datetime.now()
         transferType = "buy"
-        db.execute("INSERT INTO Purchases (StockPrice, StockAmount, StockSymbol, TransferAmount, TransferDate, TransferType, PersonID) VALUES (?,?,?,?,?,?,?);", stockPrice, stockAmount, stockSymbol, transactionAmount, transferDate, transferType, uid)
+        db.execute("INSERT INTO Purchases (StockPrice, StockAmount, StockSymbol, TransferAmount, TransferDate, TransferType, PersonID) VALUES (?,?,?,?,?,?,?);",
+                   stockPrice, stockAmount, stockSymbol, transactionAmount, transferDate, transferType, uid)
 
         # Updates the cash that the user has in their account
         db.execute("UPDATE users SET cash=? WHERE id=?;", cashLeft, uid)
@@ -180,7 +181,8 @@ def history():
     uid = session["user_id"]
 
     # Gets purchase history of the user
-    purchaseHistoryQuery = db.execute("SELECT StockSymbol, StockAmount, StockPrice, TransferDate, TransferType FROM Purchases WHERE PersonID=? ORDER BY TransferDate DESC;", uid)
+    purchaseHistoryQuery = db.execute(
+        "SELECT StockSymbol, StockAmount, StockPrice, TransferDate, TransferType FROM Purchases WHERE PersonID=? ORDER BY TransferDate DESC;", uid)
 
     # Checks if the user hasn't made any purchases
     if len(purchaseHistoryQuery) == 0:
@@ -302,6 +304,7 @@ def register():
     else:
         return render_template("registration.html")
 
+
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
@@ -327,7 +330,8 @@ def sell():
             return apology("Amount of shares must be larger than 1", 400)
 
         # Queries database for amount of owned shares
-        checkOwnedStocksQuery = db.execute("SELECT StockAmount FROM OwnedStocks WHERE PersonID=? AND StockSymbol=?", uid, stockSymbol)
+        checkOwnedStocksQuery = db.execute(
+            "SELECT StockAmount FROM OwnedStocks WHERE PersonID=? AND StockSymbol=?", uid, stockSymbol)
 
         # Checks if the user has any shares
         if len(checkOwnedStocksQuery) != 1:
@@ -348,7 +352,8 @@ def sell():
         stockPrice = stockPriceQuery["price"]
         transactionAmount = stockPrice * sharesAmount
 
-        db.execute("INSERT INTO Purchases (StockPrice, StockAmount, StockSymbol, TransferAmount, TransferDate, TransferType, PersonID) VALUES (?,?,?,?,?,?,?);", stockPrice, sharesAmount, stockSymbol, transactionAmount, transferDate, transferType, uid)
+        db.execute("INSERT INTO Purchases (StockPrice, StockAmount, StockSymbol, TransferAmount, TransferDate, TransferType, PersonID) VALUES (?,?,?,?,?,?,?);",
+                   stockPrice, sharesAmount, stockSymbol, transactionAmount, transferDate, transferType, uid)
 
         # Gets the amount of cash that the user has in their account
         cashQuery = db.execute("SELECT cash FROM users WHERE id=?", uid)
@@ -361,7 +366,8 @@ def sell():
         # Removes the existing row in database and replaces it with the updated stock amount
         if ownedStockAmountLeft != 0:
             db.execute("DELETE FROM OwnedStocks WHERE PersonID=? AND StockSymbol=?;", uid, stockSymbol)
-            db.execute("INSERT INTO OwnedStocks (PersonID, StockSymbol, StockAmount) VALUES (?,?,?);", uid, stockSymbol, ownedStockAmountLeft)
+            db.execute("INSERT INTO OwnedStocks (PersonID, StockSymbol, StockAmount) VALUES (?,?,?);",
+                       uid, stockSymbol, ownedStockAmountLeft)
         else:
             db.execute("DELETE FROM OwnedStocks WHERE PersonID=? AND StockSymbol=?;", uid, stockSymbol)
 
