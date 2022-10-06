@@ -167,7 +167,7 @@ def buy():
             # Adds new row into database with the stock amount
             db.execute("INSERT INTO OwnedStocks (PersonID, StockSymbol, StockAmount) VALUES (?,?,?);", uid, stockSymbol, stockAmount)
 
-        return render_template("bought.html", stockSymbol=stockSymbol, stockPrice=usd(stockPrice), stockAmount=stockAmount, transactionAmount=transactionAmount)
+        return render_template("bought.html", stockSymbol=stockSymbol, stockPrice=usd(stockPrice), stockAmount=stockAmount, transactionAmount=usd(transactionAmount))
     else:
         return render_template("buy.html")
 
