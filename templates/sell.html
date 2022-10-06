@@ -6,8 +6,13 @@
 
 {% block main %}
     <form action="/sell" method="POST">
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto mb-2" id="stockSymbol" name="symbol" placeholder="Symbol" type="text" required>
-        <input autocomplete="off" class="form-control mx-auto w-auto mb-2" id="stockAmount" name="shares" placeholder="Amount" type="number" required>
-        <button class="btn btn-primary" type="submit">Sell stocks</button>
+        <select class="form-select mx-auto w-25 mb-2" id="stockSymbol" name="symbol" required>
+            <option>Select symbol</option>
+            {% for symbol in symbols %}
+                <option>{{ symbol.StockSymbol }}</option>
+            {% endfor %}
+        </select>
+        <input autocomplete="off" class="form-control mx-auto w-25 mb-2" id="stockAmount" name="shares" min="1" placeholder="Amount" type="number" required>
+        <button class="btn btn-primary w-25" type="submit">Sell stocks</button>
     </form>
 {% endblock %}

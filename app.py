@@ -367,4 +367,14 @@ def sell():
 
         return render_template("sold.html", ownedStockAmountLeft=ownedStockAmountLeft, stockSymbol=stockSymbol, sharesAmount=sharesAmount, stockPrice=stockPrice, transactionAmount=transactionAmount)
     else:
-        return render_template("sell.html")
+        # Gets user id
+        uid = session["user_id"]
+
+        # Queries the database to get all of the owned stock symbols
+        symbols = db.execute("SELECT StockSymbol FROM OwnedStocks WHERE PersonID=? ORDER BY StockSymbol ASC", uid)
+
+        # Checks if the user has stocks
+        if len(symbols) == 0:
+            return render_template("noStocks.html")
+
+        return render_template("sell.html", symbols=symbols)
