@@ -365,7 +365,7 @@ def sell():
         else:
             db.execute("DELETE FROM OwnedStocks WHERE PersonID=? AND StockSymbol=?;", uid, stockSymbol)
 
-        return render_template("sold.html", ownedStockAmountLeft=ownedStockAmountLeft, stockSymbol=stockSymbol, sharesAmount=sharesAmount, stockPrice=stockPrice, transactionAmount=transactionAmount)
+        return redirect("/")
     else:
         # Gets user id
         uid = session["user_id"]
