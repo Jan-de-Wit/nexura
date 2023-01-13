@@ -79,7 +79,10 @@ def result(board, action):
     boardCopy = copy.deepcopy(board)
 
     # Sets the action to the player who has the right to play
-    boardCopy[actionRow][actionCol] = player(board)
+    try:
+        boardCopy[actionRow][actionCol] = player(board)
+    except KeyError:
+        raise ValueError("Board coordiantes must be between 0 and 2")
 
     return boardCopy
 
