@@ -13,7 +13,7 @@ CKnave = Symbol("C is a Knave")
 def generateImplications(knight, knave, sentence):
     """ 
     Generates the implications for the given sentence. 
-    Inspired by a comment made by user @m_smg on reddit:
+    Inspired by a hint in a comment made by user @m_smg on reddit:
     https://www.reddit.com/r/cs50/comments/iepghj/hello_can_any_body_explain_me_how_to_solve_the/
     """
 
@@ -29,7 +29,11 @@ baseRules = And(
     Biconditional(AKnight, Not(AKnave)),
     Biconditional(BKnight, Not(BKnave)),
     Biconditional(CKnight, Not(CKnave)),
+    Biconditional(AKnave, Not(AKnight)),
+    Biconditional(BKnave, Not(BKnight)),
+    Biconditional(CKnave, Not(CKnight))
 )
+
 
 # Puzzle 0
 # A says "I am both a knight and a knave."
@@ -64,9 +68,10 @@ knowledge2 = And(
 # C says "A is a knight."
 knowledge3 = And(
     baseRules,
+    generateImplications(AKnight, AKnave, Implication(AKnight, Or(AKnight, AKnave))),
     Implication(AKnight, Or(AKnight, AKnave)),
-    generateImplications(BKnight, BKnave, Implication(AKnight, BKnave)),
-    generateImplications(BKnight, BKnave, CKnave),
+    Implication(BKnight, BKnave),
+    Implication(BKnight, CKnight),
     generateImplications(CKnight, CKnave, AKnight)
 )
 
