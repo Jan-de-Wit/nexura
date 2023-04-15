@@ -1,0 +1,6 @@
+Initially I tried to experiment by changing a few values in the configuration of the model. However after a couple of iterations I found that I was not testing properly. That is why I decided to use a testing script to test different configurations by iterating over them and letting the model train each time. This data would then be saved into a csv file. Once it had al been ran, I decided to analyse the data in a Google Spreadsheet (linked below).
+
+Using this data we can conclude that a high dropout rate of 75% will result in a very bad accuracy and loss. On the other hand, a low dropout rate of 25% will result in a very good accuracy and loss. When looking at the data, we do not notice any difference between the amount of units in the dense layer. However, the size of the kernel does seem to matter slightly. The lower the size of the kernel, the higher the average accuracy. The lower amount of filters, gets higher the accuracy and lower loss. Using this information we can conclude that the best model would consist of 32 filters with a kernel size of (2, 2) and 152 units and finally a dropout rate of 50%. This model has a very good accuracy of more than 97% and a low loss, coming out on about 10%.
+
+Data and visualizations: 
+https://docs.google.com/spreadsheets/d/1nkbEb5afRjQBT33uZbpsZ2DqYa49ajJWJ0okxOJdc_o/edit?usp=sharing
