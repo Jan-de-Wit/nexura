@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #262629;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: right;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 20%;
+  margin-right: 2em;
+}
+
+nav > a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  padding: 10px 0;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  transition: 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form > input,
+#ImFeelingLucky {
+  width: 600px;
+  height: 40px;
+  padding: 5px;
+  margin: 5px;
+  border: none;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[name="q"] {
+  border-radius: 24px;
+  height: 30px;
+  padding-left: 24px;
+  background-color: #262629;
+  border: 1px solid #6e6e6e;
+  text-align: left;
+  color: #fff;
+}
+
+input[name="q"]:hover,
+input[name="q"]:focus {
+  border: 1px solid #fff;
+  background-color: #383838;
+  transition: 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+input[type="submit"],
+#ImFeelingLucky {
+  width: 175px;
+  background-color: #383838;
+  border: 1px solid #383838;
+  color: #fff;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover,
+#ImFeelingLucky:hover {
+  border: 2px solid #6e6e6e;
+  transition: 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: 175px 175px;
+  grid-template-rows: 52px;
+  grid-gap: 10px;
+}
+
+#ImFeelingLucky {
+  max-width: 163px;
+  max-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#AdvancedSearchBtn {
+  background-color: lightskyblue;
+  border: 1px solid lightskyblue;
+  color: #000;
+  width: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+#AdvancedSearchBtn:hover {
+  background-color: rgb(0, 191, 255);
+  border: 2px solid rgb(0, 191, 255);
+  transition: 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.advancedGridContainer {
+  display: grid;
+  position: absolute;
+  left: 0;
+  margin: 40px;
+  grid-template-columns: 400px 500px;
+  grid-template-rows: 52px 52px 52px 52px 52px;
+  grid-gap: 10px;
+  color: #fff;
+}
+
+.advancedGridContainer > input {
+  background-color: #262629;
+  border: 1px solid #6e6e6e;
+  color: #fff;
+  padding: 5px;
+}
+
+.advancedGridContainer > input:focus,
+.advancedGridContainer > input:hover {
+  border: 1px solid #fff;
+  background-color: #383838;
+  transition: 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
