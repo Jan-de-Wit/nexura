@@ -1,0 +1,42 @@
+{% extends "auctions/layout.html" %}
+
+{% block head %}
+<link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+{% endblock %} 
+
+{% block title %}
+    Watchlist
+{% endblock %}
+
+{% block body %}
+<h2 style="text-align: center; margin-bottom: 1em">Watchlist</h2>
+<div class="container">
+  {% for listing in listings %}
+  <div class="e1_3">
+    <div class="e1_2"
+      {% if listing.image %}
+      style="background-image: url( {{ listing.image }} );"
+      alt="Product Image"
+      {% else %}
+      style="background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);" alt="No image"
+      {% endif %}
+    ></div>
+    <div class="e1_5">
+      <span class="e1_4"> {{ listing.title }} </span>
+    </div>
+    <span class="e1_6"> {{ listing.description }} </span>
+    <div class="e1_7" style="color: #1c1c1c">
+      <a href="{% url 'view_listing' listing.id %}">
+        <span class="e1_8"> Show More </span>
+      </a>
+    </div>
+    <span class="e1_9">${{ listing.currentPrice|floatformat:"2g" }}</span>
+    {% if listing.category %}
+    <span class="e1_11"> Categories: {{ listing.category }} </span>
+    {% endif %}
+  </div>
+  {% empty %}
+  <p style="text-align:center;">No listings saved in your watchlist.</p>
+  {% endfor %}
+</div>
+{% endblock %}

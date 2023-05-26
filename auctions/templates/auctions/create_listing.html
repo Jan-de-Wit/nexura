@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    Create Listing
+{% endblock %}
+
+{% block body %}
+    <h2>Create Listings</h2>
+
+    <form action="{% url 'create_listing' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" class="form-control" name="title" placeholder="Title" value="{{ listing.title }}" required>
+        <input type="text" class="form-control" name="description" placeholder="Description" value="{{ listing.description }}" required>
+        <input type="text" class="form-control" name="starting_bid" placeholder="Starting Bid" value="{{ listing.starting_bid }}" required pattern="^[0-9\.]*$">
+        <input type="text" class="form-control" name="image" placeholder="Image URL (optional)" value="{{ listing.image }}">
+        <input type="text" class="form-control" name="category" placeholder="Category (optional)" value="{{ listing.category }}">
+        <input type="submit" value="Create Listing" class="btn btn-primary">
+    </form>
+    <p>{{ message|safe }}</p>
+{% endblock %}

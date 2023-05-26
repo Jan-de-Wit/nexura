@@ -1,0 +1,102 @@
+{% extends "auctions/layout.html" %} {% block title %} Create Listing {% endblock %} 
+
+{% block head %}
+<link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+{% endblock %} 
+
+{% block body %}
+<div class="e5_4">
+    <div class="e5_5"
+    {% if listing.image %}
+    style="background-image: url( {{ listing.image }} );"
+    alt="Product Image"
+    {% else %}
+    style="
+        background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(9, 9, 121, 1) 35%,
+        rgba(0, 212, 255, 1) 100%
+        );"
+    alt="No image"
+    {% endif %} ></div><div class="e5_6"></div>
+  <span class="e5_8">{{ listing.description }}</span>
+  {% if request.user.is_authenticated %}
+  <div class="e5_9" style="color: #1c1c1c">
+    <a href="{% url 'manipulate_watchlist' listing.id %}">
+      <span class="e1_8">{% if onWatchlist %}Remove from Watchlist{% else %}Add to Watchlist{% endif %}</span>
+    </a>
+  </div>
+  {% endif %}
+  <span class="e5_11">${{ listing.currentPrice|floatformat:"2g" }}</span>
+  <span class="e5_12">Categories: {{ listing.category }}</span>
+  <span class="e6_14">{{ listing.title }}</span>
+</div>
+
+<div class="bidContainer" style="width:50%;left:0px;">
+  <h3>Bids</h3>
+  {% for bidding in bids %}
+  <div class="form-control" style="text-align:center;width: 60%;">
+    <span style="font-weight: 800;">{{ bidding.user }}</span>: ${{ bidding.bid|floatformat:"2g" }}
+  </div>
+  {% empty %}
+  <div class="form-control" style="text-align:center;width: 60%;">
+    No bids yet.
+  </div>
+  {% endfor %}
+
+  {% if request.user.is_authenticated and request.user == listing.created_by and listing.active == True %}
+    <div class="e1_7" style="height: 70px;position: relative;left:0;width:60%;">
+      <a href="{% url 'close_listing' listing.id %}">
+        <span class="e1_8">Close Listing</span>
+      </a>
+    </div>
+    <p>{{ message }}</p>
+  {% endif %}
+
+{% if request.user == listing.winner and listing.active == False %}
+  <div class="form-control" style="background-color:#00ff22;height: 35px;position: relative;left:0;width:60%;text-align:center;color: #0c0c0c;">
+      You've won this auction!
+  </div>
+{% endif %}
+
+{% if request.user.is_authenticated and request.user != listing.created_by and listing.active == True %}
+<form action="{% url 'place_bid' listing.id %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <input type="number" class="form-control" name="bid" step="0.01" min="{{ listing.currentPrice }}" placeholder="Bid" required />
+  </div>
+  <button type="submit" class="btn btn-primary" style="width: 100%;">Place Bid</button>
+  {% if message %}
+  <p style="color: red;text-align: center;">{{ message }}</p>
+  {% endif %}
+</form>
+{% endif %}
+</div>
+
+{% if request.user.is_authenticated %}
+<div class="bidContainer" style="right: 5%;width:50%;">
+  <h3>Comments</h3>
+  {% for comment in comments %}
+    <div class="form-control" style="text-align:center;width:60%;">
+      <span style="font-weight: 800;">{{ comment.user }}</span>: {{ comment.comment }}
+    </div>
+    {% empty %}
+    <div class="form-control" style="text-align:center;width:60%;">
+      No comments yet.
+    </div>
+  {% endfor %}
+  <form action="{% url 'place_comment' listing.id %}" method="POST" style="width=60%;">
+    {% csrf_token %}
+    <div class="form-group" style="width: 100%;">
+      <input type="text" class="form-control" placeholder="Comment" name="comment" required />
+    </div>
+    <button type="submit" class="btn btn-primary" style="width: 100%;">Place Comment</button>
+    {% if commentMessage %}
+    <p style="color: red;text-align: center;">{{ commentMessage }}</p>
+    {% endif %}
+  </form>
+</div>
+{% endif %}
+
+{% endblock %}
