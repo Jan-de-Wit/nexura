@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %} 
+
+{% block head %}
+<link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+{% endblock %} 
+
+{% block body %}
+<h2 style="text-align: center; margin-bottom: 1em">All Categories</h2>
+<div class="container">
+  {% for item in categories %}
+  <div class="e1_3">
+    <div class="e1_2" style="background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);" alt="No image"></div>
+    <div class="e1_5">
+      <span class="e1_4"> {{ item }} </span>
+    </div>
+    <div class="e1_7" style="color: #1c1c1c">
+      <a href="{% url 'view_category' item %}">
+        <span class="e1_8"> Show Items </span>
+      </a>
+    </div>
+  </div>
+  {% empty %}
+  <p style="text-align:center;">No categories found.</p>
+  {% endfor %}
+</div>
+{% endblock %}
