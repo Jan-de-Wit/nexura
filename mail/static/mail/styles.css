@@ -1,0 +1,141 @@
+textarea {
+  min-height: 400px;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background-color: #0c0c0c;
+  color: #ececec;
+  text-align: center;
+}
+
+#emails-view {
+  width: 60vw;
+  position: relative;
+}
+
+h3 {
+  width: 100%;
+}
+
+.form-control {
+  background-color: #1c1c1c;
+  color: #ececec;
+}
+
+.form-control:disabled {
+  background-color: #0c0c0c;
+  color: #ececec;
+}
+
+.e13_2 {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
+  background-color: #1c1c1c;
+  width: 60vw;
+  height: 350px;
+  position: relative;
+  margin: 2rem;
+  border-radius: 12px;
+}
+.e13_3 {
+  color: #ececec;
+  width: 870px;
+  height: 59px;
+  position: absolute;
+  left: 56px;
+  top: 90px;
+  font-family: Inter;
+  text-align: left;
+  font-size: 36px;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+.e13_4 {
+  color: #ececec;
+  width: 870px; 
+  height: 21px;
+  position: absolute;
+  left: 56px;
+  top: 141px;
+  font-family: Inter;
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.e13_16 {
+  color: #ececec;
+  width: 870px;
+  height: 16px;
+  position: absolute;
+  left: 56px;
+  top: 162px;
+  font-family: Inter;
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.e13_15 {
+  color: #ececec;
+  width: 503px;
+  height: 80px;
+  position: absolute;
+  left: 56px;
+  top: 188px;
+  font-family: Inter;
+  text-align: left;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+.e13_14 {
+  color: #ececec;
+  width: 20%;
+  height: 59px;
+  position: absolute;
+  left: 70%;
+  top: 120px;
+  font-family: Inter;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+.e13_5 {
+  width: 5%;
+  height: 120px;
+  position: absolute;
+  left: 75%;
+  top: 150px;
+  cursor: pointer;
+}
+.e13_6 {
+  background-color: #ececec;
+  width: 96px;
+  height: 85px;
+  position: absolute;
+  left: 11.999998092651367px;
+  top: 17.999370574951172px;
+}
+.e13_17 {
+  background-color: #ececec;
+  width: 100.00001525878906px;
+  height: 80.00001525878906px;
+  position: absolute;
+  left: 10px;
+  top: 20px;
+}
+.e13_9 {
+  width: 5%;
+  height: 120px;
+  position: absolute;
+  left: 81%;
+  top: 150px;
+  cursor: pointer;
+}
+.e13_10 {
+  background-color: #ececec;
+  width: 105px;
+  height: 75px;
+  position: absolute;
+  left: 7.5px;
+  top: 22.5px;
+}
