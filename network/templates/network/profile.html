@@ -1,0 +1,299 @@
+{% extends "network/layout.html" %} {% block head %}
+<script>
+  var CSRF_TOKEN = "{{ csrf_token }}";
+  var user = {
+    id: "{{ user.id }}",
+    username: "{{ user.username }}",
+  };
+
+  function displayPosts(posts) {
+    var element = document.getElementById("postsView");
+    element.innerHTML = "";
+
+    posts.forEach((post) => {
+      var post_element = document.createElement("div");
+      post_element.className = "container bg-light d-block mt-5 p-5 rounded";
+
+      var topRow = document.createElement("div");
+      topRow.className = "row";
+
+      var userDiv = document.createElement("div");
+      userDiv.className = "col-2";
+      var anchorTag = document.createElement("a");
+      anchorTag.href = `/profile/${post.user_id}`;
+      var userH5 = document.createElement("h5");
+      userH5.innerHTML = post.user;
+      anchorTag.append(userH5);
+      userDiv.append(anchorTag);
+      topRow.append(userDiv);
+
+      var contentDiv = document.createElement("div");
+      contentDiv.className = "col-10";
+      var contentP = document.createElement("p");
+      contentP.innerHTML = post.content;
+      topRow.append(contentP);
+
+      post_element.append(topRow);
+
+      var bottomRow = document.createElement("div");
+      bottomRow.className = "row";
+
+      var timestampDiv = document.createElement("div");
+      timestampDiv.className = "col-2";
+      var timestampP = document.createElement("p");
+      timestampP.innerHTML = post.timestamp;
+      timestampDiv.append(timestampP);
+      bottomRow.append(timestampDiv);
+
+      var likeCountDiv = document.createElement("div");
+      likeCountDiv.className = "col-2";
+      var likeCountP = document.createElement("p");
+      likeCountP.innerHTML = `${post.like_count} Likes`;
+      likeCountDiv.append(likeCountP);
+      bottomRow.append(likeCountDiv);
+
+      var buttonDiv = document.createElement("div");
+      buttonDiv.className = "col-8";
+
+      var likeButton = document.createElement("button");
+      likeButton.className = "btn btn-primary m-2";
+      is_liked = false;
+      post.likes.forEach((like) => {
+        if (like == user.id) {
+          is_liked = true;
+        }
+      })
+      if (is_liked) {
+        likeButton.innerHTML = "Unlike";
+      } else {
+        likeButton.innerHTML = "Like";
+      }
+      likeButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        fetch(`/like/${post.id}`, {
+          method: "PUT",
+          headers: { "X-CSRFToken": CSRF_TOKEN },
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            if (response.status_code != 200) {
+              throw new Error(response.message);
+            }
+            likeCountP.innerHTML = `${response.like_count} Likes`;
+            if (response.is_liked) {
+              likeButton.innerHTML = "Unlike";
+            } else {
+              likeButton.innerHTML = "Like";
+            }
+          })
+          .catch((error) => {
+            alert(`An error has occurred: ${error.message}`);
+          });
+      });
+      buttonDiv.append(likeButton);
+
+      if (post.user_id == user.id) {
+        const POST_ID = post.id;
+
+        var editButton = document.createElement("button");
+        editButton.className = "btn btn-primary m-2";
+        editButton.id = "edit";
+        editButton.innerHTML = "Edit";
+        editButton.addEventListener("click", () => {
+          editButton = document.createElement("form");
+          editButton.className = "form text-center";
+          const textArea = document.createElement("textarea");
+          textArea.className = "form-control";
+          textArea.innerHTML = post.content;
+          editButton.append(textArea);
+
+          const messageField = document.createElement("p");
+          messageField.id = "form-message";
+          editButton.append(messageField);
+
+          const submitButton = document.createElement("button");
+          submitButton.className = "btn btn-primary mt-2 w-100";
+          submitButton.innerHTML = "Save";
+
+          submitButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            fetch(`../update_post/${POST_ID}`,
+              {
+                method: "PUT",
+                body: JSON.stringify({
+                  content: textArea.value,
+                }),
+                headers: { "X-CSRFToken": CSRF_TOKEN },
+              })
+              .then((response) => response.json())
+              .then((response) => {
+                if (response.status_code != 200) {
+                  throw new Error(response.message);
+                }
+                message = document.getElementById("form-message");
+                message.innerHTML = response.message;
+                message.style.color = "green";
+              })
+              .then(() => {
+                window.location.reload();
+              })
+              .catch((error) => {
+                message = document.getElementById("form-message");
+                message.innerHTML = `An error has occurred: ${error.message}`;
+                message.style.color = "red";
+              }
+              )
+          })
+          editButton.append(submitButton);
+
+          document.querySelector("#edit").innerHTML = editButton;
+          document.querySelector("#edit").replaceWith(editButton);
+
+        })
+        buttonDiv.append(editButton);
+      }
+      bottomRow.append(buttonDiv);
+
+      post_element.append(bottomRow);
+
+      element.append(post_element);
+    });
+  }
+
+  function createPaginationLink(pageNumber, isCurrent) {
+    var link = document.createElement("a");
+    link.href = "javascript:void(0);";
+    link.className = "page-link";
+    link.innerHTML = pageNumber;
+
+    if (isCurrent) {
+      link.classList.add("wRizzo");
+    }
+
+    link.onclick = function () {
+      getPosts(pageNumber);
+    };
+
+    var listItem = document.createElement("li");
+    listItem.className = "page-item";
+    listItem.appendChild(link);
+
+    return listItem;
+  }
+
+  function createPaginationControl(text, pageNumber, disabled) {
+    var link = document.createElement("a");
+    link.href = "javascript:void(0);";
+    link.className = "page-link";
+    link.innerHTML = text;
+
+    var listItem = document.createElement("li");
+    listItem.className = "page-item";
+
+    if (disabled) {
+      link.setAttribute("aria-disabled", "true");
+      listItem.classList.add("disabled");
+    } else {
+      link.onclick = function () {
+        getPosts(pageNumber);
+      };
+    }
+
+    listItem.appendChild(link);
+
+    return listItem;
+  }
+
+  function getPosts(pageNumber) {
+    fetch("/view_posts_by_user/{{ profile.id }}?page=" + pageNumber, {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": CSRF_TOKEN,
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.status_code != 200) {
+          throw new Error(response.message);
+        }
+
+        var posts = response.posts;
+        displayPosts(posts);
+
+        var paginationDiv = document.getElementById("pagination");
+        paginationDiv.innerHTML = "";
+
+        if (response.num_pages > 1) {
+          var ul = document.createElement("ul");
+          ul.className = "pagination justify-content-center";
+
+          var previousPageLink = createPaginationControl(
+            "Previous",
+            response.previous_page_number,
+            !response.has_previous
+          );
+          ul.appendChild(previousPageLink);
+
+          for (var i = 1; i <= response.num_pages; i++) {
+            var isCurrent = i === pageNumber;
+            var pageLink = createPaginationLink(i, isCurrent);
+            ul.appendChild(pageLink);
+          }
+
+          var nextPageLink = createPaginationControl(
+            "Next",
+            response.next_page_number,
+            !response.has_next
+          );
+          ul.appendChild(nextPageLink);
+
+          paginationDiv.appendChild(ul);
+        }
+      })
+      .catch((error) => {
+        alert(`An error has occurred: ${error.message}`);
+      });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    getPosts(1);
+
+    document.querySelector("#follow").addEventListener("click", () => {
+      const profile_id = "{{ profile.id }}";
+      const is_following = "{{ is_following|lower }}";
+      fetch(`/follow/${profile_id}`, {
+        method: "PUT",
+        headers: {
+          "X-CSRFToken": CSRF_TOKEN,
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.status_code != 200) {
+            throw new Error(result.message);
+          }
+          window.location.reload();
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    });
+  });
+</script>
+{% endblock%} {% block body %}
+<h1 class="m-2">{{ profile.username }}</h1>
+
+<div class="row m-2">
+  <p>{{ profile.follower_count }} Followers</p>
+  {% if user.is_authenticated and user.id != profile.id %}
+  <button id="follow" class="btn btn-primary ml-2">
+    {% if is_following %}Unfollow{% else %}Follow{% endif %}
+  </button>
+  {% endif %}
+</div>
+<p class="m-2">Following {{ profile.following_count }} Account(s)</p>
+
+<div id="postsView"></div>
+
+<div id="pagination" class="text-center mt-4"></div>
+{% endblock %}
