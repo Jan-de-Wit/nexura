@@ -1,0 +1,59 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+
+{% block title %}Recent Tracks{% endblock %}
+
+{% block content %}
+<section class="recent-tracks">
+    <h2 class="title">Recent tracks</h2>
+    <div id="track-container">
+        <div id="loading" class="loading">
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+        </div>
+    </div>
+</section>
+
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="{% static '/website/js/min/generate_track.min.js' %}"></script>
+<script>
+    const trackContainer = document.getElementById('track-container');
+    const CSRF_TOKEN = "{{ csrf_token }}";
+
+    fetch("{% url 'get_recent_tracks' %}", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "X-CSRFToken": CSRF_TOKEN,
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.tracks.length == 0) {
+                const element = document.createElement('h2');
+                element.className = "title";
+                element.innerText = `No recent tracks found`;
+                trackContainer.append(element);
+                return;
+            }
+            trackContainer.innerHTML = "";
+
+            data.tracks.forEach(track => {
+                const element = generate_track(track);
+                trackContainer.append(element)
+            });
+        }).catch(error => {
+            const element = document.createElement('p');
+            element.innerText = `Error loading tracks: ${error}`;
+            element.style.color = "red";
+            element.className = "normal-text";
+            trackContainer.append(element);
+        });
+</script>
+{% endblock %}

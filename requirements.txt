@@ -1,0 +1,3 @@
+audiocraft
+django
+torch>=2.0

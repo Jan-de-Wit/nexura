@@ -1,0 +1,30 @@
+{% extends 'website/layout.html' %} 
+{% load static %} 
+
+{% block title %}Sign in{% endblock %} 
+
+{% block content %}
+<form class="login-form" action="{% url 'login' %}" method="POST">
+  <h2>Welcome back!</h2>
+  <div class="form-group">
+    <input id="username" name="username" type="text" class="form-field" required autofocus />
+    <label for="username" class="form-label">Username</label>
+  </div>
+  <div class="form-group">
+    <input id="password" name="password" type="password" class="form-field" required autofocus />
+    <label for="password" class="form-label">Password</label>
+  </div>
+  {% csrf_token %}
+  {% if message %}
+  <p style="color: red; font-family: 'Inter'">{{ message }}</p>
+  {% endif %}
+
+  <button type="submit" class="largeAuthButton">
+    <p>Sign in</p>
+  </button>
+  <p class="normal-text">
+    Don't have an account?
+    <a href="{% url 'register' %}" class="login-link">Register here</a>
+  </p>
+</form>
+{% endblock %}
