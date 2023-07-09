@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="{% static 'website/js/smoothscroll.min.js' %}"></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'website/icons/favicon.svg' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'website/css/min/style.min.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    {% block js %}{% endblock %}
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <a href="{% url 'index' %}" class="logo">
+                <p>ALSONIC</p>
+            </a>
+            <div class="rightside-nav">
+                <a href="{% url 'view_recent_tracks' %}" class="nav-item">Recent</a>
+                <a href="{% url 'view_search' %}" class="nav-item">Search</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="authBtn nav-item">
+                    Sign out
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}" class="authBtn nav-item">
+                    Sign in
+                </a>
+                {% endif %}
+            </div>
+        </nav>
+        <div class="waveformIcon">
+            <svg width="370" height="94" viewBox="0 0 370 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M355.948 40.7386H370V53.2614H355.948V40.7386ZM328.258 56.928H342.31V37.072H328.258V56.928ZM301.032 67.1984H315.084V26.8016H301.032V67.1984ZM275.151 75.1235H289.202V19.2462H275.151V75.11V75.1235ZM247.442 61.4778H261.494V32.5222H247.442V61.4778ZM219.295 83.3878H233.347V9.37304H219.251V83.3878H219.295ZM191.596 94H205.648V0H191.596V94ZM164.37 79.488H178.422V14.5117H164.37V79.4883V79.488ZM136.205 61.036H150.257V33.6481H136.205V61.036ZM108.98 54.5071H123.032V39.4687H108.98V54.5319V54.5071ZM81.7547 62.5526H95.8067V31.4367H81.7547V62.5627V62.5526ZM54.9683 77.6152H69.0203V14.6042H54.9691V77.6262L54.9683 77.6152ZM27.7436 67.9888H41.7955V25.47H27.7436V67.9995V67.9888ZM0 56.928H14.052V37.072H0V56.928Z"
+                    fill="url(#paint0_linear_1_39)" />
+                <path
+                    d="M355.948 40.7386H370V53.2614H355.948V40.7386ZM328.258 56.928H342.31V37.072H328.258V56.928ZM301.032 67.1984H315.084V26.8016H301.032V67.1984ZM275.151 75.1235H289.202V19.2462H275.151V75.11V75.1235ZM247.442 61.4778H261.494V32.5222H247.442V61.4778ZM219.295 83.3878H233.347V9.37304H219.251V83.3878H219.295ZM191.596 94H205.648V0H191.596V94ZM164.37 79.488H178.422V14.5117H164.37V79.4883V79.488ZM136.205 61.036H150.257V33.6481H136.205V61.036ZM108.98 54.5071H123.032V39.4687H108.98V54.5319V54.5071ZM81.7547 62.5526H95.8067V31.4367H81.7547V62.5627V62.5526ZM54.9683 77.6152H69.0203V14.6042H54.9691V77.6262L54.9683 77.6152ZM27.7436 67.9888H41.7955V25.47H27.7436V67.9995V67.9888ZM0 56.928H14.052V37.072H0V56.928Z"
+                    fill="url(#paint1_linear_1_39)" />
+                <defs>
+                    <linearGradient id="paint0_linear_1_39" x1="1.37836e-06" y1="47" x2="370" y2="47"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FF0000" />
+                        <stop offset="1" stop-color="#0075FF" />
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_1_39" x1="185" y1="0" x2="185" y2="94"
+                        gradientUnits="userSpaceOnUse">
+                        <stop stop-opacity="0" />
+                        <stop offset="1" stop-color="#D9D9D9" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

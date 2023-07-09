@@ -1,0 +1,104 @@
+{% extends 'website/layout.html' %} 
+{% load static %} 
+
+{% block title %}Alsonic: AI music generator{% endblock %}
+
+{% block content %}
+<form id="generate-track">
+  <div class="searchBar" id="search-bar">
+    <input id="prompt" type="text" placeholder="Start generating..." autofocus rows="1" name="prompt" maxlength="256"
+      autocomplete="off" />
+    <button type="submit" id="generateBtn">
+      <svg class="bi bi-music-note" fill="currentColor" height="30px" width="30px" viewBox="0 0 16 16" width="16"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z" />
+        <path d="M9 3v10H8V3h1z" fill-rule="evenodd" />
+        <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z" />
+      </svg>
+    </button>
+  </div>
+  <p id="message" class="normal-text"></p>
+</form>
+
+<div id="track-container"></div>
+
+<div id="loading" style="display: none; margin-bottom: 40px; height: 50px" class="loading">
+  <div class="obj"></div>
+  <div class="obj"></div>
+  <div class="obj"></div>
+  <div class="obj"></div>
+  <div class="obj"></div>
+  <div class="obj"></div>
+  <div class="obj"></div>
+  <div class="obj"></div>
+</div>
+
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="{% static '/website/js/min/generate_track.min.js' %}"></script>
+<script>
+  let isGenerating = false;
+  var form_prompt = document.getElementById("prompt");
+  var message = document.getElementById("message");
+  var form = document.getElementById("generate-track");
+
+  const CSRF_TOKEN = "{{ csrf_token }}";
+  const generateBtn = document.getElementById("generateBtn");
+  const searchBar = document.getElementById("search-bar");
+  const loading = document.getElementById("loading");
+
+  const trackContainer = document.getElementById("track-container");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (isGenerating || form_prompt.value.trim() == "") return;
+
+    searchBar.style.borderRadius = "5px";
+    form_prompt.style.textAlign = "center";
+
+    isGenerating = true;
+    message.innerHTML = "Generating...";
+    message.style.color = "white";
+    loading.style.display = "flex";
+    generateBtn.style.display = "none";
+
+    fetch("{% url 'generate_from_prompt' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": CSRF_TOKEN,
+      },
+      body: JSON.stringify({
+        prompt: form_prompt.value,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        isGenerating = false;
+        loading.style.display = "none";
+        searchBar.style.borderRadius = "120px";
+        generateBtn.style.display = "block";
+        form_prompt.style.textAlign = "left";
+
+        if (data["status"] != "Success") {
+          message.innerHTML = "Error: " + data["message"];
+          message.style.color = "red";
+          return;
+        }
+        message.innerHTML = "Generated!";
+        message.style.color = "green";
+        form_prompt.style.textAlign = "left";
+        const element = generate_track(data.track);
+        trackContainer.append(element);
+      })
+      .catch((error) => {
+        isGenerating = false;
+        loading.style.display = "none";
+        message.innerHTML = "Error: " + error;
+        message.style.color = "red";
+        searchBar.style.borderRadius = "120px";
+        generateBtn.style.display = "block";
+        form_prompt.style.textAlign = "left";
+      });
+  });
+</script>
+{% endblock %}

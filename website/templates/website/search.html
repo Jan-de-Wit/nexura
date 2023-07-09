@@ -1,0 +1,87 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+
+{% block title %}Search for Tracks{% endblock %}
+
+{% block content %}
+<form id="search-form">
+    <div class="searchBar">
+        <input id="prompt" type="text" placeholder="Search..." {% if query %} value="{{ query }}" {% endif %} autofocus rows="1" name="q" maxlength="256" autocomplete="off"></input>
+        <button type="submit">
+            <svg width="30px" height="30px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M31.0002 31.0002L23.7619 23.7619M23.7619 23.7619C25 22.5237 25.9822 21.0538 26.6523 19.4361C27.3223 17.8184 27.6672 16.0846 27.6672 14.3336C27.6672 12.5826 27.3223 10.8487 26.6523 9.23098C25.9822 7.61326 25 6.14337 23.7619 4.90522C22.5237 3.66708 21.0538 2.68492 19.4361 2.01484C17.8184 1.34476 16.0846 0.999878 14.3336 0.999878C12.5826 0.999878 10.8487 1.34476 9.23098 2.01484C7.61326 2.68492 6.14337 3.66708 4.90522 4.90522C2.40467 7.40577 0.999878 10.7972 0.999878 14.3336C0.999878 17.8699 2.40467 21.2613 4.90522 23.7619C7.40577 26.2624 10.7972 27.6672 14.3336 27.6672C17.8699 27.6672 21.2613 26.2624 23.7619 23.7619Z" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+    <p id="message"></p>
+</form>
+
+<section class="search-results">
+    <h2 id="result-count" class="title"></h2>
+    <div id="track-container"></div>
+</section>
+
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="{% static '/website/js/min/generate_track.min.js' %}"></script>
+<script>
+    const trackContainer = document.getElementById('track-container');
+    const CSRF_TOKEN = "{{ csrf_token }}";
+    const search_form = document.getElementById('search-form');
+    const query = document.getElementById('prompt');
+    const result_count = document.getElementById('result-count');
+
+
+    search_form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (query.value.trim() == "") return;
+
+        fetch("{% url 'get_search_results' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": CSRF_TOKEN,
+            },
+            body: JSON.stringify({
+                query: query.value,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status != "Success") {
+                    const element = document.createElement('p');
+                    element.innerText = `Error loading tracks: ${data.message}`;
+                    element.style.color = "red";
+                    element.className = "normal-text";
+                    trackContainer.innerHTML = "";
+                    trackContainer.append(element);
+                    return;
+                } else if (data.message == "No tracks found.") {
+                    result_count.innerText = `No results found`;
+                    trackContainer.innerHTML = "";
+                    return;
+                }
+
+                var result_text = (data.result.length == 1) ? "result" : "results";
+                result_count.innerText = `${data.result.length} ${result_text} found`;
+
+                trackContainer.innerHTML = "";
+    
+                data.result.forEach(track => {
+                    const element = generate_track(track);
+                    trackContainer.append(element)
+                });
+            }).catch(error => {
+                const element = document.createElement('p');
+                element.innerText = `Error loading tracks: ${error}`;
+                element.style.color = "red";
+                element.className = "normal-text";
+                trackContainer.append(element);
+            });
+    });
+
+    
+</script>
+
+
+{% endblock %}
