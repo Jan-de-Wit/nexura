@@ -110,8 +110,6 @@ def view_search(request):
     return render(request, "website/search.html")
 
 
-# ! Wrap API Route in try catch
-
 @csrf_exempt
 def generate_from_prompt(request):
     if request.method == "POST" and request.user.is_authenticated:
